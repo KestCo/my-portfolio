@@ -8,7 +8,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="mb-24">
           <p className="text-gray-500 mb-4 text-sm tracking-widest uppercase">
-            Brad Kester — Production Editor & Developer
+            Brad Kester — Journalist & Developer
           </p>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
