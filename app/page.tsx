@@ -1,65 +1,106 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen bg-black text-white px-6 py-16">
+      <div className="max-w-5xl mx-auto">
+
+        {/* Hero Section */}
+        <section className="mb-24">
+          <p className="text-gray-500 mb-4 text-sm tracking-widest uppercase">
+            Brad Kester — Production Editor & Developer
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            I build tools that improve how content gets created.
+          </h1>
+
+          <p className="text-lg text-gray-400 max-w-2xl mb-10">
+            Working at the intersection of journalism, automation and AI — building systems and tools that make newsrooms and workplaces more efficient.
+          </p>
+
+          <div className="flex gap-4">
+            <Link
+              href="#projects"
+              className="bg-white text-black px-6 py-3 rounded-2xl font-medium hover:opacity-80 transition"
+            >
+              View Projects
+            </Link>
+            <Link
+              href="#about"
+              className="border border-gray-700 px-6 py-3 rounded-2xl font-medium hover:border-white transition"
+            >
+              About Me
+            </Link>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className="mb-24">
+          <h2 className="text-2xl font-semibold mb-10">Featured Work</h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+
+            {/* Automation */}
+            <Link
+              href="/projects/automation"
+              className="group border border-gray-800 rounded-2xl p-8 hover:border-gray-500 transition"
+            >
+              <h3 className="text-xl font-semibold mb-3 group-hover:underline">
+                Automation Systems
+              </h3>
+              <p className="text-gray-400 mb-6">
+                AI-powered tools and workflows for headline writing, page automation and content production efficiency.
+              </p>
+              <span className="text-sm text-gray-500 group-hover:text-white transition">
+                View demos →
+              </span>
+            </Link>
+
+            {/* Apps */}
+            <Link
+              href="/projects/apps"
+              className="group border border-gray-800 rounded-2xl p-8 hover:border-gray-500 transition"
+            >
+              <h3 className="text-xl font-semibold mb-3 group-hover:underline">
+                Apps & Interactive Tools
+              </h3>
+              <p className="text-gray-400 mb-6">
+                Interactive applications exploring logic, feedback systems and user-driven experiences.
+              </p>
+              <span className="text-sm text-gray-500 group-hover:text-white transition">
+                View demos →
+              </span>
+            </Link>
+
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="mb-24">
+          <h2 className="text-2xl font-semibold mb-6">About</h2>
+
+          <p className="text-gray-400 max-w-2xl leading-relaxed">
+            I started in small-town journalism, working as a news reporter in Junction City, Kansas, then moved into sports reporting in Columbus, Nebraska. From there, I stepped into larger roles — becoming a sports editor and eventually a managing editor in Ridgecrest, California.
+            <br /><br />
+            My path shifted into production and design in Carson City, Nevada, then expanded further in Austin, Texas, where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston, working across copy editing, production systems and team management.
+            <br /><br />
+            Along the way, I started noticing the same themes showing up everywhere — in the Wall Street Journal, The New York Times, CNBC and across our own Texas publications: automation, AI and the future of work. That curiosity turned into focus. About five years ago, I began working directly with automation systems through Stibo, helping develop template and layout systems as part of Hearst’s early push into production automation.
+            <br /><br />
+            From there, I wanted to understand AI more deeply, so I started building. I trained tools using a Hearst stylebook, grammar references and dictionaries to see how far I could push them in real editorial workflows. That experimentation turned into practical systems — GPT tools, APIs, automation workflows and the projects showcased on this site.
+            <br /><br />
+            I’m entirely self-taught, and I tend to work across disciplines rather than within one lane — connecting ideas between journalism, technology and operations. That cross-pollination is what drives most of what I build: tools that are grounded in real workflows but shaped by experimentation and curiosity.
+            <br /><br />
+            Outside of work, I played college football and paint — two disciplines that continue to shape how I approach structure, creativity and problem-solving.
+          </p>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-800 pt-6 text-gray-500 text-sm">
+          © {new Date().getFullYear()} Brad Kester
+        </footer>
+
+      </div>
+    </main>
   );
 }
