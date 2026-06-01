@@ -18,7 +18,8 @@ function scoreHeadline(headline: string, story: string) {
   let contextMatch = story
     .toLowerCase()
     .includes(words[0]?.toLowerCase())
-    ? 8 : 6;
+    ? 8
+    : 6;
 
   let total =
     (clarity + brevity + verbStrength + specificity + contextMatch) / 5;
@@ -53,12 +54,14 @@ function adjustLength(text: string, min: number, max: number) {
     result = result.slice(0, max);
   }
 
-  return result;
+  return result.trim();
 }
 
 export default function HeadlineTool() {
   const [story, setStory] = useState("");
   const [userHeadline, setUserHeadline] = useState("");
+  const [avoidWords, setAvoidWords] = useState("");
+  const [includeWords, setIncludeWords] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [userScore, setUserScore] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -70,23 +73,32 @@ export default function HeadlineTool() {
     setUserHeadline("");
   };
 
-  const generateHeadlines = () => {
+  const generateHeadlines = async () => {
     if (!story) return;
 
     setLoading(true);
 
-    setTimeout(() => {
-      const base = [
-        "City announces new downtown redevelopment plan",
-        "Officials reveal major changes to downtown project",
-        "New plan could reshape Houston downtown area",
-        "Downtown redevelopment plan approved by city council",
-        "City leaders move forward with new downtown plan",
-        "New downtown plan moves ahead after approval",
-      ];
+    try {
+      const res = await fetch("/api/generate-headlines", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          story,
+          avoidWords,
+          includeWords,
+        }),
+      });
 
-      const generated = ranges.map((range, i) => {
-        const adjusted = adjustLength(base[i], range.min, range.max);
+      const data = await res.json();
+
+      const generated = data.headlines || [];
+
+      const structured = ranges.map((range, i) => {
+        const base = generated[i] || "Headline not generated";
+
+        const adjusted = adjustLength(base, range.min, range.max);
 
         return {
           label: range.label,
@@ -96,16 +108,16 @@ export default function HeadlineTool() {
         };
       });
 
-      const best = generated.reduce((prev, current) =>
+      const best = structured.reduce((prev, current) =>
         parseFloat(prev.score.total) > parseFloat(current.score.total)
           ? prev
           : current
       );
 
       setResults(
-        generated.map((g) => ({
-          ...g,
-          isBest: g.text === best.text,
+        structured.map((r) => ({
+          ...r,
+          isBest: r.text === best.text,
         }))
       );
 
@@ -116,9 +128,11 @@ export default function HeadlineTool() {
           score: scoreHeadline(userHeadline, story),
         });
       }
+    } catch (err) {
+      console.error(err);
+    }
 
-      setLoading(false);
-    }, 600);
+    setLoading(false);
   };
 
   return (
@@ -130,26 +144,42 @@ export default function HeadlineTool() {
         </h1>
 
         <p className="text-gray-400 mb-8">
-          Enter your headline and story to generate alternatives and evaluate them like an editor.
+          Generate and evaluate headlines using editorial rules and AI.
         </p>
 
-        {/* INPUT CARD */}
         <div className="bg-gray-800 p-6 rounded-2xl mb-8 shadow-lg">
 
-          {/* HEADLINE FIRST */}
           <label className="block text-sm text-gray-300 mb-2">
             Your Headline (optional)
           </label>
 
           <input
-            className="w-full p-3 rounded-xl bg-white text-black mb-6"
-            placeholder="Enter your headline..."
+            className="w-full p-3 rounded-xl bg-white text-black mb-4"
             value={userHeadline}
             onChange={(e) => setUserHeadline(e.target.value)}
           />
 
-          {/* STORY SECOND */}
-          <div className="flex justify-between items-center mb-3">
+          <label className="block text-sm text-gray-300 mb-2">
+            Words to Avoid
+          </label>
+
+          <input
+            className="w-full p-3 rounded-xl bg-white text-black mb-4"
+            value={avoidWords}
+            onChange={(e) => setAvoidWords(e.target.value)}
+          />
+
+          <label className="block text-sm text-gray-300 mb-2">
+            Words to Include
+          </label>
+
+          <input
+            className="w-full p-3 rounded-xl bg-white text-black mb-6"
+            value={includeWords}
+            onChange={(e) => setIncludeWords(e.target.value)}
+          />
+
+          <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-300">
               Story / Article
             </label>
@@ -164,33 +194,25 @@ export default function HeadlineTool() {
 
           <textarea
             className="w-full p-4 rounded-xl bg-white text-black mb-4"
-            placeholder="Paste your story here..."
             value={story}
             onChange={(e) => setStory(e.target.value)}
           />
 
           <button
             onClick={generateHeadlines}
-            className="bg-white text-black px-5 py-2 rounded-xl font-medium hover:opacity-80 transition"
+            className="bg-white text-black px-5 py-2 rounded-xl"
           >
             {loading ? "Analyzing..." : "Generate & Score Headlines"}
           </button>
-
         </div>
 
-        {/* USER HEADLINE */}
         {userScore && (
           <div className="mb-8 border border-gray-700 p-4 rounded-xl bg-gray-800">
             <h2 className="text-lg font-semibold mb-2">
               Your Headline
             </h2>
 
-            <div className="flex justify-between">
-              <p>{userScore.text}</p>
-              <span className="text-xs text-gray-400">
-                {userScore.length} chars
-              </span>
-            </div>
+            <p>{userScore.text}</p>
 
             <p className="text-sm mt-2">
               Score: <strong>{userScore.score.total}/10</strong>
@@ -198,7 +220,6 @@ export default function HeadlineTool() {
           </div>
         )}
 
-        {/* RESULTS */}
         <div className="space-y-6">
           {results.map((r, i) => (
             <div
@@ -209,15 +230,9 @@ export default function HeadlineTool() {
                   : "border border-gray-700 bg-gray-800"
               }`}
             >
-              <div className="flex justify-between items-center mb-2">
-                <h2 className="text-lg font-semibold">
-                  {r.label}: {r.text}
-                </h2>
-
-                <span className="text-xs text-gray-400">
-                  {r.length} chars
-                </span>
-              </div>
+              <h2 className="text-lg font-semibold mb-2">
+                {r.label}: {r.text}
+              </h2>
 
               {r.isBest && (
                 <p className="text-green-400 text-sm mb-2">
@@ -225,17 +240,9 @@ export default function HeadlineTool() {
                 </p>
               )}
 
-              <p className="text-sm mb-3">
+              <p className="text-sm">
                 Score: <strong>{r.score.total}/10</strong>
               </p>
-
-              <div className="text-xs text-gray-400 grid grid-cols-2 gap-2">
-                <p>Clarity: {r.score.clarity}</p>
-                <p>Brevity: {r.score.brevity}</p>
-                <p>Verb Strength: {r.score.verbStrength}</p>
-                <p>Specificity: {r.score.specificity}</p>
-                <p>Context Match: {r.score.contextMatch}</p>
-              </div>
             </div>
           ))}
         </div>
