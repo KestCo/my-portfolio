@@ -10,7 +10,7 @@ export default function AppsPage() {
 
         {/* Intro */}
         <p className="text-gray-300 mb-10 text-lg">
-          A collection of small applications built to explore interaction, logic and real-world problem solving. These projects focus on how users engage with systems and how feedback shapes behavior.
+          A collection of small applications built to explore interaction, logic, and real-world problem solving.
         </p>
 
         <div className="space-y-16">
@@ -29,7 +29,17 @@ export default function AppsPage() {
               <source src="/videos/app-one.mp4" type="video/mp4" />
             </video>
 
-            <p className="text-gray-500 text-sm">
+            {/* ✅ LIVE BUTTON */}
+            <a
+              href="https://word-architect.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-black px-4 py-2 rounded-xl text-sm mt-2 hover:opacity-80 transition"
+            >
+              Try Word Architect Live →
+            </a>
+
+            <p className="text-gray-500 text-sm mt-4">
               Built to explore how users interact with language, structure and creative constraints.
             </p>
           </div>
@@ -53,23 +63,6 @@ export default function AppsPage() {
             </p>
           </div>
 
-        </div>
-
-        {/* Impact Section */}
-        <div className="mt-20">
-          <h2 className="text-xl font-semibold mb-6">What this shows</h2>
-
-          <div className="space-y-4 text-gray-400">
-            <p>
-              • Ability to build interactive systems and applications from the ground up
-            </p>
-            <p>
-              • Understanding of user interaction, feedback loops and system behavior
-            </p>
-            <p>
-              • Experience moving from concept to working application
-            </p>
-          </div>
         </div>
 
       </div>
