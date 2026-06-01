@@ -1,13 +1,14 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function POST(req: Request) {
   try {
     const { story, avoidWords, includeWords } = await req.json();
+
+    // ✅ MOVE CLIENT HERE
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
     const prompt = `
 You are a professional newsroom editor.
@@ -23,7 +24,6 @@ Rules:
 - Prefer: ${includeWords || "none"}
 - Each headline should feel distinct
 - Do NOT number them
-- Do NOT include bullet points
 
 Story:
 ${story}
@@ -36,7 +36,6 @@ ${story}
 
     const text = response.choices[0].message.content || "";
 
-    // CLEAN OUTPUT (this is the key upgrade)
     const headlines = text
       .split("\n")
       .map(line => line.replace(/^\d+[\).\s-]*/, "").trim())
