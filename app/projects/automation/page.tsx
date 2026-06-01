@@ -10,7 +10,7 @@ export default function ProjectPage() {
 
         {/* Summary */}
         <p className="text-gray-300 mb-10 text-lg">
-          A collection of tools and workflows designed to improve efficiency in content production. These projects explore how automation and AI can reduce manual work, improve consistency, and scale output across teams.
+          A collection of tools and workflows designed to improve efficiency in content production. These projects explore how automation and AI can reduce manual work, improve consistency and scale output across teams.
         </p>
 
         {/* Demo Section */}
@@ -25,7 +25,7 @@ export default function ProjectPage() {
                 Headline Writing GPT
               </h3>
               <p className="text-gray-400 mb-3 text-sm">
-                Generates headlines using GPT workflows tailored to editorial style, tone, and newsroom standards.
+                Generates headlines using GPT workflows tailored to editorial style, tone and newsroom standards.
               </p>
               <video controls className="w-full rounded-2xl">
                 <source src="/videos/headline-tool.mp4" type="video/mp4" />

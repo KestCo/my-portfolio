@@ -16,7 +16,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg text-gray-400 max-w-2xl mb-10">
-            Working at the intersection of journalism, automation, and AI—building systems and tools that make newsrooms and workplaces more efficient.
+            Working at the intersection of journalism, automation and AI—building systems and tools that make newsrooms and workplaces more efficient.
           </p>
 
           <div className="flex gap-4">
@@ -50,7 +50,7 @@ export default function Home() {
                 Automation Systems
               </h3>
               <p className="text-gray-400 mb-6">
-                AI-powered tools and workflows for headline writing, page automation, and content production efficiency.
+                AI-powered tools and workflows for headline writing, page automation and content production efficiency.
               </p>
               <span className="text-sm text-gray-500 group-hover:text-white transition">
                 View demos →
@@ -66,7 +66,7 @@ export default function Home() {
                 Apps & Interactive Tools
               </h3>
               <p className="text-gray-400 mb-6">
-                Interactive applications exploring logic, feedback systems, and user-driven experiences.
+                Interactive applications exploring logic, feedback systems and user-driven experiences.
               </p>
               <span className="text-sm text-gray-500 group-hover:text-white transition">
                 View demos →
@@ -82,7 +82,7 @@ export default function Home() {
                 How This Site Was Built
               </h3>
               <p className="text-gray-400 mb-6">
-                A step-by-step guide showing how this portfolio was built and deployed using Next.js, GitHub, and Vercel.
+                A step-by-step guide showing how this portfolio was built and deployed using Next.js, GitHub and Vercel.
               </p>
               <span className="text-sm text-gray-500 group-hover:text-white transition">
                 View guide →
@@ -97,17 +97,17 @@ export default function Home() {
           <h2 className="text-2xl font-semibold mb-6">About</h2>
 
           <p className="text-gray-400 max-w-2xl leading-relaxed">
-            I started in small-town journalism, working as a news reporter in Junction City, Kansas, then moved into sports reporting in Columbus, Nebraska. From there, I stepped into larger roles—becoming a sports editor and eventually a managing editor in Ridgecrest, California.
+            I started in small-town journalism, working as a news reporter in Junction City, Kansas, then moved into sports reporting in Columbus, Nebraska. From there, I stepped into larger roles — becoming a sports editor and eventually a managing editor in Ridgecrest, California.
             <br /><br />
-            My path shifted into production and design in Carson City, Nevada, then expanded further in Austin, Texas, where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston, working across copy editing, production systems, and team management.
+            My path shifted into production and design in Carson City, Nevada, then expanded further in Austin, Texas, where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston, working across copy editing, production systems and team management.
             <br /><br />
-            Along the way, I started noticing the same themes showing up everywhere—in the Wall Street Journal, the New York Times, CNBC, and across our own Texas publications: automation, AI, and the future of work. That curiosity turned into focus. About five years ago, I began working directly with automation systems through Stibo, helping develop template and layout systems as part of Hearst’s early push into production automation.
+            Along the way, I started noticing the same themes showing up everywhere — in the Wall Street Journal, the New York Times, CNBC and across our own Texas publications: automation, AI, and the future of work. That curiosity turned into focus. About five years ago, I began working directly with automation systems through Stibo, helping develop template and layout systems as part of Hearst’s early push into production automation.
             <br /><br />
-            From there, I wanted to understand AI more deeply, so I started building. I trained tools using a Hearst stylebook, grammar references, and dictionaries to see how far I could push them in real editorial workflows. That experimentation turned into practical systems—GPT tools, automation workflows, and the projects showcased on this site.
+            From there, I wanted to understand AI more deeply, so I started building. I trained tools using a Hearst stylebook, grammar references and dictionaries to see how far I could push them in real editorial workflows. That experimentation turned into practical systems—GPT tools, automation workflows and the projects showcased on this site.
             <br /><br />
-            I’m entirely self-taught, and I tend to work across disciplines rather than within one lane—connecting ideas between journalism, technology, and operations. That cross-pollination is what drives most of what I build: tools that are grounded in real workflows but shaped by experimentation and curiosity.
+            I’m entirely self-taught, and I tend to work across disciplines rather than within one lane — connecting ideas between journalism, technology and operations. That cross-pollination is what drives most of what I build: tools that are grounded in real workflows but shaped by experimentation, curiosity and the user experience.
             <br /><br />
-            Outside of work, I played college football and paint—two disciplines that continue to shape how I approach structure, creativity, and problem-solving.
+            Outside of work, I played college football and paint — two disciplines that continue to shape how I approach structure, creativity and problem-solving.
           </p>
         </section>
 
