@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-16">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         {/* Hero Section */}
         <section className="mb-24">
@@ -39,20 +39,20 @@ export default function Home() {
         <section id="projects" className="mb-24">
           <h2 className="text-2xl font-semibold mb-10">Featured Work</h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {/* Automation */}
             <Link
               href="/projects/automation"
-              className="group border border-gray-800 rounded-2xl p-8 hover:border-gray-500 transition"
+              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition"
             >
-              <h3 className="text-xl font-semibold mb-3 group-hover:underline">
+              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
                 Automation Systems
               </h3>
-              <p className="text-gray-400 mb-6">
-                AI-powered tools and workflows for headline writing, page automation and content production efficiency.
+              <p className="text-gray-400 text-sm mb-4">
+                AI-powered workflows for headline writing, layout automation and newsroom efficiency.
               </p>
-              <span className="text-sm text-gray-500 group-hover:text-white transition">
+              <span className="text-xs text-gray-500 group-hover:text-white transition">
                 View demos →
               </span>
             </Link>
@@ -60,31 +60,47 @@ export default function Home() {
             {/* Apps */}
             <Link
               href="/projects/apps"
-              className="group border border-gray-800 rounded-2xl p-8 hover:border-gray-500 transition"
+              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition"
             >
-              <h3 className="text-xl font-semibold mb-3 group-hover:underline">
+              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
                 Apps & Interactive Tools
               </h3>
-              <p className="text-gray-400 mb-6">
-                Interactive applications exploring logic, feedback systems and user-driven experiences.
+              <p className="text-gray-400 text-sm mb-4">
+                Interactive applications exploring logic, feedback and user-driven systems.
               </p>
-              <span className="text-sm text-gray-500 group-hover:text-white transition">
+              <span className="text-xs text-gray-500 group-hover:text-white transition">
                 View demos →
+              </span>
+            </Link>
+
+            {/* Headline Tool */}
+            <Link
+              href="/projects/headline-tool"
+              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition"
+            >
+              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
+                Headline Generator + Scorer
+              </h3>
+              <p className="text-gray-400 text-sm mb-4">
+                A custom tool that generates, scores and ranks headlines using editorial constraints and context.
+              </p>
+              <span className="text-xs text-gray-500 group-hover:text-white transition">
+                Try the tool →
               </span>
             </Link>
 
             {/* Guide */}
             <Link
               href="/projects/how-this-site-was-built"
-              className="group border border-gray-800 rounded-2xl p-8 hover:border-gray-500 transition"
+              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition"
             >
-              <h3 className="text-xl font-semibold mb-3 group-hover:underline">
-                How This Site Was Built
+              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
+                How this site was built
               </h3>
-              <p className="text-gray-400 mb-6">
-                A step-by-step guide showing how this portfolio was built and deployed using Next.js, GitHub and Vercel.
+              <p className="text-gray-400 text-sm mb-4">
+                A step-by-step guide showing how this portfolio was built and deployed.
               </p>
-              <span className="text-sm text-gray-500 group-hover:text-white transition">
+              <span className="text-xs text-gray-500 group-hover:text-white transition">
                 View guide →
               </span>
             </Link>
@@ -101,11 +117,9 @@ export default function Home() {
             <br /><br />
             My path shifted into production and design in Carson City, Nevada, then expanded further in Austin, Texas, where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston, working across copy editing, production systems and team management.
             <br /><br />
-            Along the way, I started noticing the same themes showing up everywhere — in the Wall Street Journal, the New York Times, CNBC and across our own Texas publications: automation, AI, and the future of work. That curiosity turned into focus. About five years ago, I began working directly with automation systems through Stibo, helping develop template and layout systems as part of Hearst’s early push into production automation.
+            Along the way, I started noticing recurring themes across major publications — automation, AI and the future of work. That curiosity led me to build tools and systems that improve efficiency and output.
             <br /><br />
-            From there, I wanted to understand AI more deeply, so I started building. I trained tools using a Hearst stylebook, grammar references and dictionaries to see how far I could push them in real editorial workflows. That experimentation turned into practical systems—GPT tools, automation workflows and the projects showcased on this site.
-            <br /><br />
-            I’m entirely self-taught, and I tend to work across disciplines rather than within one lane — connecting ideas between journalism, technology and operations. That cross-pollination is what drives most of what I build: tools that are grounded in real workflows but shaped by experimentation, curiosity and the user experience.
+            I’m entirely self-taught and tend to work across disciplines, connecting ideas between journalism, technology and operations.
             <br /><br />
             Outside of work, I played college football and paint — two disciplines that continue to shape how I approach structure, creativity and problem-solving.
           </p>
