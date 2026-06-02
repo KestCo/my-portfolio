@@ -38,12 +38,6 @@ function scoreHeadline(headline: string, story: string) {
     penalty;
 
   return {
-    clarity,
-    brevity,
-    verbStrength,
-    specificity,
-    contextMatch,
-    voiceScore,
     total: total.toFixed(1),
   };
 }
@@ -100,7 +94,9 @@ export default function HeadlineTool() {
   const [includeWords, setIncludeWords] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [userScore, setUserScore] = useState<any>(null);
+  const [improvedHeadline, setImprovedHeadline] = useState("");
   const [loading, setLoading] = useState(false);
+  const [improving, setImproving] = useState(false);
 
   const fillSample = () => {
     setStory(
@@ -158,7 +154,6 @@ export default function HeadlineTool() {
       if (userHeadline) {
         setUserScore({
           text: userHeadline,
-          length: userHeadline.length,
           score: scoreHeadline(userHeadline, story),
         });
       }
@@ -167,6 +162,37 @@ export default function HeadlineTool() {
     }
 
     setLoading(false);
+  };
+
+  const improveHeadline = async () => {
+    if (!userHeadline) return;
+
+    if (!story) {
+      alert("Add a story for context before improving the headline.");
+      return;
+    }
+
+    setImproving(true);
+
+    try {
+      const res = await fetch("/api/improve-headline", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          headline: userHeadline,
+          story,
+        }),
+      });
+
+      const data = await res.json();
+      setImprovedHeadline(data.improved);
+    } catch (err) {
+      console.error(err);
+    }
+
+    setImproving(false);
   };
 
   return (
@@ -181,7 +207,7 @@ export default function HeadlineTool() {
           AI-powered headline generation, scoring, and editorial refinement.
         </p>
 
-        <div className="bg-gray-900/80 backdrop-blur p-8 rounded-3xl mb-10 shadow-xl border border-gray-800">
+        <div className="bg-gray-900/80 p-8 rounded-3xl mb-10 shadow-xl border border-gray-800">
 
           <label className="block text-sm text-gray-300 mb-2">
             Your Headline (optional)
@@ -238,7 +264,7 @@ export default function HeadlineTool() {
 
           <button
             onClick={generateHeadlines}
-            className="w-full bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80"
+            className="w-full bg-white text-black py-3 rounded-xl font-semibold"
           >
             {loading ? "Analyzing..." : "Generate Headlines"}
           </button>
@@ -246,11 +272,33 @@ export default function HeadlineTool() {
 
         {userScore && (
           <div className="mb-10 border border-gray-700 p-5 rounded-2xl bg-gray-900">
-            <h2 className="text-lg font-semibold mb-2">Your Headline</h2>
-            <p>{userScore.text}</p>
-            <p className="text-sm mt-2">
+            <h2 className="text-lg font-semibold mb-2">
+              Your Headline
+            </h2>
+
+            <p className="mb-2">{userScore.text}</p>
+
+            <p className="text-sm mb-3">
               Score: <strong>{userScore.score.total}/10</strong>
             </p>
+
+            <button
+              onClick={improveHeadline}
+              className="bg-gray-700 px-4 py-2 rounded-xl text-sm hover:bg-gray-600"
+            >
+              {improving ? "Improving..." : "Improve Headline"}
+            </button>
+
+            {improvedHeadline && (
+              <div className="mt-4 p-4 bg-gray-800 rounded-xl border border-gray-700">
+                <p className="text-xs text-gray-400 mb-1">
+                  Improved Version
+                </p>
+                <p className="text-white font-medium">
+                  {improvedHeadline}
+                </p>
+              </div>
+            )}
           </div>
         )}
 
@@ -261,20 +309,15 @@ export default function HeadlineTool() {
             return (
               <div
                 key={i}
-                className={`p-6 rounded-2xl transition-all ${
+                className={`p-6 rounded-2xl ${
                   r.isBest
                     ? "border border-green-400 bg-green-900/20"
                     : "border border-gray-700 bg-gray-900"
                 }`}
               >
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="text-lg font-semibold">
-                    {r.label}: {r.text}
-                  </h2>
-                  <span className="text-xs text-gray-400">
-                    {r.length} chars
-                  </span>
-                </div>
+                <h2 className="text-lg font-semibold mb-2">
+                  {r.label}: {r.text}
+                </h2>
 
                 {r.isBest && (
                   <p className="text-green-400 text-sm mb-2">
@@ -282,7 +325,7 @@ export default function HeadlineTool() {
                   </p>
                 )}
 
-                <p className="text-sm mb-2">
+                <p className="text-sm">
                   Score: <strong>{r.score.total}/10</strong>
                 </p>
 
