@@ -1,104 +1,70 @@
-"use client";
+import OpenAI from "openai";
+import { NextResponse } from "next/server";
 
-import { useState } from "react";
+export async function POST(req: Request) {
+  try {
+    const { story, pronunciations } = await req.json();
 
-export default function PodcastTool() {
-  const [story, setStory] = useState("");
-  const [audioUrl, setAudioUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const fillSample = () => {
-    setStory(
-      "The Houston City Council approved a major downtown redevelopment plan Tuesday that will bring new housing, retail, and public spaces to the area over the next five years."
-    );
-  };
-
-  const generatePodcast = async () => {
-    if (!story) return;
-
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/generate-podcast", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ story }),
-      });
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-
-      setAudioUrl(url);
-    } catch (err) {
-      console.error(err);
+    if (!story) {
+      return NextResponse.json(
+        { error: "Story is required" },
+        { status: 400 }
+      );
     }
 
-    setLoading(false);
-  };
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
 
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-950 to-black text-white px-6 py-16">
-      <div className="max-w-4xl mx-auto">
+    const prompt = `
+You are creating a casual but intelligent news podcast conversation.
 
-        {/* Title */}
-        <h1 className="text-4xl font-bold mb-2">
-          Front Page Focus
-        </h1>
+Turn the following story into a natural spoken discussion.
 
-        <p className="text-gray-400 mb-8">
-          Turn news stories into conversational podcast discussions.
-        </p>
+Guidelines:
+- DO NOT label speakers (no "Host 1", "Host 2")
+- Write as natural conversational dialogue
+- Keep sentences short and clear for audio
+- Sound like two people talking naturally
+- Avoid repetition and filler
+- Focus on clarity and insight
 
-        {/* Input Card */}
-        <div className="bg-gray-900/80 p-8 rounded-3xl mb-10 shadow-xl border border-gray-800">
+${pronunciations ? `Use these pronunciation adjustments when writing:
+${pronunciations}` : ""}
 
-          <div className="flex justify-between items-center mb-2">
-            <label className="text-sm text-gray-300">
-              Story / Article
-            </label>
+Story:
+${story}
+`;
 
-            <button
-              onClick={fillSample}
-              className="text-xs text-gray-400 hover:text-white"
-            >
-              Use sample
-            </button>
-          </div>
+    // Generate script
+    const scriptResponse = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+    });
 
-          <textarea
-            className="w-full p-4 rounded-xl bg-white text-black mb-6 min-h-[160px]"
-            placeholder="Paste story here..."
-            value={story}
-            onChange={(e) => setStory(e.target.value)}
-          />
+    const script = scriptResponse.choices[0].message.content || "";
 
-          <button
-            onClick={generatePodcast}
-            className="w-full bg-white text-black py-3 rounded-xl font-semibold"
-          >
-            {loading ? "Generating Podcast..." : "Generate Podcast"}
-          </button>
+    // Convert to speech
+    const audioResponse = await client.audio.speech.create({
+      model: "gpt-4o-mini-tts",
+      voice: "alloy",
+      input: script,
+    });
 
-        </div>
+    const audioBuffer = Buffer.from(await audioResponse.arrayBuffer());
 
-        {/* Player */}
-        {audioUrl && (
-          <div className="bg-gray-900 p-6 rounded-2xl border border-gray-800 shadow-lg">
+    return new NextResponse(audioBuffer, {
+      headers: {
+        "Content-Type": "audio/mpeg",
+      },
+    });
 
-            <h2 className="text-xl font-semibold mb-4">
-              Podcast Player
-            </h2>
+  } catch (error) {
+    console.error("Podcast error:", error);
 
-            <audio controls className="w-full">
-              <source src={audioUrl} type="audio/mpeg" />
-            </audio>
-
-          </div>
-        )}
-
-      </div>
-    </main>
-  );
+    return NextResponse.json(
+      { error: "Failed to generate podcast" },
+      { status: 500 }
+    );
+  }
 }
