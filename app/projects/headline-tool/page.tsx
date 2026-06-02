@@ -56,7 +56,7 @@ function getFeedback(headline: string) {
   }
 
   if (/\bis\b|\bare\b|\bwas\b|\bwere\b/.test(headline)) {
-    feedback.push("Consider using a stronger active verb.");
+    feedback.push("Use stronger active verbs.");
   }
 
   if (headline.length > 70) {
@@ -170,52 +170,52 @@ export default function HeadlineTool() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white px-6 py-12">
-      <div className="max-w-3xl mx-auto">
+    <main className="min-h-screen bg-gradient-to-b from-gray-950 to-black text-white px-6 py-16">
+      <div className="max-w-4xl mx-auto">
 
-        <h1 className="text-3xl font-bold mb-4">
-          Headline Generator + Scorer
+        <h1 className="text-4xl font-bold mb-2">
+          Headline Architect
         </h1>
 
         <p className="text-gray-400 mb-8">
-          Generate and evaluate headlines using editorial rules and AI.
+          AI-powered headline generation, scoring, and editorial refinement.
         </p>
 
-        <div className="bg-gray-800 p-6 rounded-2xl mb-8 shadow-lg">
+        <div className="bg-gray-900/80 backdrop-blur p-8 rounded-3xl mb-10 shadow-xl border border-gray-800">
 
           <label className="block text-sm text-gray-300 mb-2">
             Your Headline (optional)
           </label>
 
           <input
-            className="w-full p-3 rounded-xl bg-white text-black mb-4"
+            className="w-full p-4 rounded-xl bg-white text-black mb-5"
             value={userHeadline}
             onChange={(e) => setUserHeadline(e.target.value)}
           />
 
-          <label className="block text-sm text-gray-300 mb-2">
-            Words to Avoid
-          </label>
+          <div className="grid md:grid-cols-2 gap-4 mb-5">
+            <div>
+              <label className="block text-sm text-gray-300 mb-2">
+                Words to Avoid
+              </label>
+              <input
+                className="w-full p-3 rounded-xl bg-white text-black"
+                value={avoidWords}
+                onChange={(e) => setAvoidWords(e.target.value)}
+              />
+            </div>
 
-          <input
-            className="w-full p-3 rounded-xl bg-white text-black mb-2"
-            value={avoidWords}
-            onChange={(e) => setAvoidWords(e.target.value)}
-          />
-
-          <p className="text-xs text-gray-500 mb-4">
-            Leave blank if you don't need constraints.
-          </p>
-
-          <label className="block text-sm text-gray-300 mb-2">
-            Words to Include
-          </label>
-
-          <input
-            className="w-full p-3 rounded-xl bg-white text-black mb-6"
-            value={includeWords}
-            onChange={(e) => setIncludeWords(e.target.value)}
-          />
+            <div>
+              <label className="block text-sm text-gray-300 mb-2">
+                Words to Include
+              </label>
+              <input
+                className="w-full p-3 rounded-xl bg-white text-black"
+                value={includeWords}
+                onChange={(e) => setIncludeWords(e.target.value)}
+              />
+            </div>
+          </div>
 
           <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-300">
@@ -231,27 +231,23 @@ export default function HeadlineTool() {
           </div>
 
           <textarea
-            className="w-full p-4 rounded-xl bg-white text-black mb-4"
+            className="w-full p-4 rounded-xl bg-white text-black mb-5 min-h-[140px]"
             value={story}
             onChange={(e) => setStory(e.target.value)}
           />
 
           <button
             onClick={generateHeadlines}
-            className="bg-white text-black px-5 py-2 rounded-xl"
+            className="w-full bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80"
           >
-            {loading ? "Analyzing..." : "Generate & Score Headlines"}
+            {loading ? "Analyzing..." : "Generate Headlines"}
           </button>
         </div>
 
         {userScore && (
-          <div className="mb-8 border border-gray-700 p-4 rounded-xl bg-gray-800">
-            <h2 className="text-lg font-semibold mb-2">
-              Your Headline
-            </h2>
-
+          <div className="mb-10 border border-gray-700 p-5 rounded-2xl bg-gray-900">
+            <h2 className="text-lg font-semibold mb-2">Your Headline</h2>
             <p>{userScore.text}</p>
-
             <p className="text-sm mt-2">
               Score: <strong>{userScore.score.total}/10</strong>
             </p>
@@ -265,15 +261,20 @@ export default function HeadlineTool() {
             return (
               <div
                 key={i}
-                className={`p-5 rounded-xl ${
+                className={`p-6 rounded-2xl transition-all ${
                   r.isBest
-                    ? "border border-green-500 bg-green-900/20"
-                    : "border border-gray-700 bg-gray-800"
+                    ? "border border-green-400 bg-green-900/20"
+                    : "border border-gray-700 bg-gray-900"
                 }`}
               >
-                <h2 className="text-lg font-semibold mb-2">
-                  {r.label}: {r.text}
-                </h2>
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-lg font-semibold">
+                    {r.label}: {r.text}
+                  </h2>
+                  <span className="text-xs text-gray-400">
+                    {r.length} chars
+                  </span>
+                </div>
 
                 {r.isBest && (
                   <p className="text-green-400 text-sm mb-2">
@@ -281,7 +282,7 @@ export default function HeadlineTool() {
                   </p>
                 )}
 
-                <p className="text-sm">
+                <p className="text-sm mb-2">
                   Score: <strong>{r.score.total}/10</strong>
                 </p>
 
