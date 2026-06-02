@@ -17,17 +17,26 @@ export async function POST(req: Request) {
     });
 
     const prompt = `
-You are a professional newsroom editor.
+You are a senior newsroom editor.
 
-Write 6 high-quality news headlines for the story below.
+Your job is not just to write headlines, but to identify the most compelling editorial angles from the story and express them clearly.
 
-Rules:
-- Use clear, direct, non-clickbait language
-- Use active voice and strong verbs
-- Be specific and avoid vague phrasing
-- Each headline must be distinct
+Write 6 distinct news headlines for the story below.
+
+Each headline should:
+- Emphasize a DIFFERENT angle (decision, impact, conflict, scale, timeline, or key detail)
+- Use strong, active verbs
+- Be specific and concrete
+- Avoid vague or generic phrasing
+- Sound like something that would appear in a major publication (NYT, WSJ, etc.)
+- Avoid repetition in structure
+- Each headline should vary in structure, not just wording
+
+Strict rules:
+- Do NOT use clickbait
+- Do NOT use filler words like "huge", "big", "major" unless necessary
+- Do NOT repeat the same phrasing across headlines
 - Do NOT number the headlines
-- Do NOT use bullet points
 
 ${avoidWords ? `- STRICTLY avoid using these words: ${avoidWords}` : ""}
 ${includeWords ? `- MUST include at least one of these words when relevant: ${includeWords}` : ""}

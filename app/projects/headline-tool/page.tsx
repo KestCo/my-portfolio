@@ -8,12 +8,18 @@ function scoreHeadline(headline: string, story: string) {
   let clarity = words.length > 4 ? 8 : 6;
   let brevity = words.length <= 12 ? 9 : 6;
 
-  let verbStrength = /announces|reveals|launches|approves|rejects|wins|loses/i.test(headline)
-    ? 9
-    : 6;
+  let strongVerbPattern =
+    /announces|reveals|launches|approves|rejects|wins|loses|passes|builds|cuts/i;
+  let verbStrength = strongVerbPattern.test(headline) ? 9 : 5;
+
+  let weakWords = /very|really|huge|big|major|important/i;
+  let penalty = weakWords.test(headline) ? -2 : 0;
 
   let specificity =
-    /\d|Houston|Mayor|City|Texas/i.test(headline) ? 8 : 6;
+    /\d|Houston|Mayor|City|Texas|Council/i.test(headline) ? 8 : 6;
+
+  let passive = /\bis\b|\bare\b|\bwas\b|\bwere\b/.test(headline);
+  let voiceScore = passive ? 5 : 9;
 
   let contextMatch = story
     .toLowerCase()
@@ -22,7 +28,14 @@ function scoreHeadline(headline: string, story: string) {
     : 6;
 
   let total =
-    (clarity + brevity + verbStrength + specificity + contextMatch) / 5;
+    (clarity +
+      brevity +
+      verbStrength +
+      specificity +
+      contextMatch +
+      voiceScore) /
+      6 +
+    penalty;
 
   return {
     clarity,
@@ -30,8 +43,31 @@ function scoreHeadline(headline: string, story: string) {
     verbStrength,
     specificity,
     contextMatch,
+    voiceScore,
     total: total.toFixed(1),
   };
+}
+
+function getFeedback(headline: string) {
+  let feedback = [];
+
+  if (/very|really|huge|big|major/.test(headline)) {
+    feedback.push("Avoid vague or inflated language.");
+  }
+
+  if (/\bis\b|\bare\b|\bwas\b|\bwere\b/.test(headline)) {
+    feedback.push("Consider using a stronger active verb.");
+  }
+
+  if (headline.length > 70) {
+    feedback.push("Headline may be too long.");
+  }
+
+  if (headline.split(" ").length < 4) {
+    feedback.push("Headline may be too vague.");
+  }
+
+  return feedback;
 }
 
 const ranges = [
@@ -92,7 +128,6 @@ export default function HeadlineTool() {
       });
 
       const data = await res.json();
-
       const generated = data.headlines || [];
 
       const structured = ranges.map((range, i) => {
@@ -148,7 +183,6 @@ export default function HeadlineTool() {
 
         <div className="bg-gray-800 p-6 rounded-2xl mb-8 shadow-lg">
 
-          {/* HEADLINE */}
           <label className="block text-sm text-gray-300 mb-2">
             Your Headline (optional)
           </label>
@@ -159,14 +193,12 @@ export default function HeadlineTool() {
             onChange={(e) => setUserHeadline(e.target.value)}
           />
 
-          {/* WORDS TO AVOID */}
           <label className="block text-sm text-gray-300 mb-2">
             Words to Avoid
           </label>
 
           <input
             className="w-full p-3 rounded-xl bg-white text-black mb-2"
-            placeholder="e.g. new, huge, shocking"
             value={avoidWords}
             onChange={(e) => setAvoidWords(e.target.value)}
           />
@@ -175,19 +207,16 @@ export default function HeadlineTool() {
             Leave blank if you don't need constraints.
           </p>
 
-          {/* WORDS TO INCLUDE */}
           <label className="block text-sm text-gray-300 mb-2">
             Words to Include
           </label>
 
           <input
             className="w-full p-3 rounded-xl bg-white text-black mb-6"
-            placeholder="e.g. Houston, mayor"
             value={includeWords}
             onChange={(e) => setIncludeWords(e.target.value)}
           />
 
-          {/* STORY */}
           <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-300">
               Story / Article
@@ -215,7 +244,6 @@ export default function HeadlineTool() {
           </button>
         </div>
 
-        {/* USER HEADLINE */}
         {userScore && (
           <div className="mb-8 border border-gray-700 p-4 rounded-xl bg-gray-800">
             <h2 className="text-lg font-semibold mb-2">
@@ -230,32 +258,43 @@ export default function HeadlineTool() {
           </div>
         )}
 
-        {/* RESULTS */}
         <div className="space-y-6">
-          {results.map((r, i) => (
-            <div
-              key={i}
-              className={`p-5 rounded-xl ${
-                r.isBest
-                  ? "border border-green-500 bg-green-900/20"
-                  : "border border-gray-700 bg-gray-800"
-              }`}
-            >
-              <h2 className="text-lg font-semibold mb-2">
-                {r.label}: {r.text}
-              </h2>
+          {results.map((r, i) => {
+            const feedback = getFeedback(r.text);
 
-              {r.isBest && (
-                <p className="text-green-400 text-sm mb-2">
-                  ⭐ Recommended
+            return (
+              <div
+                key={i}
+                className={`p-5 rounded-xl ${
+                  r.isBest
+                    ? "border border-green-500 bg-green-900/20"
+                    : "border border-gray-700 bg-gray-800"
+                }`}
+              >
+                <h2 className="text-lg font-semibold mb-2">
+                  {r.label}: {r.text}
+                </h2>
+
+                {r.isBest && (
+                  <p className="text-green-400 text-sm mb-2">
+                    ⭐ Recommended
+                  </p>
+                )}
+
+                <p className="text-sm">
+                  Score: <strong>{r.score.total}/10</strong>
                 </p>
-              )}
 
-              <p className="text-sm">
-                Score: <strong>{r.score.total}/10</strong>
-              </p>
-            </div>
-          ))}
+                {feedback.length > 0 && (
+                  <div className="mt-2 text-xs text-gray-400">
+                    {feedback.map((f, i) => (
+                      <p key={i}>• {f}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
       </div>
