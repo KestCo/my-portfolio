@@ -5,7 +5,13 @@ export async function POST(req: Request) {
   try {
     const { story, avoidWords, includeWords } = await req.json();
 
-    // ✅ MOVE CLIENT HERE
+    if (!story) {
+      return NextResponse.json(
+        { error: "Story is required" },
+        { status: 400 }
+      );
+    }
+
     const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
@@ -16,14 +22,15 @@ You are a professional newsroom editor.
 Write 6 high-quality news headlines for the story below.
 
 Rules:
-- Clear, direct, non-clickbait
-- Active voice
-- Strong verbs
-- Avoid vague language
-- Avoid: ${avoidWords || "none"}
-- Prefer: ${includeWords || "none"}
-- Each headline should feel distinct
-- Do NOT number them
+- Use clear, direct, non-clickbait language
+- Use active voice and strong verbs
+- Be specific and avoid vague phrasing
+- Each headline must be distinct
+- Do NOT number the headlines
+- Do NOT use bullet points
+
+${avoidWords ? `- STRICTLY avoid using these words: ${avoidWords}` : ""}
+${includeWords ? `- MUST include at least one of these words when relevant: ${includeWords}` : ""}
 
 Story:
 ${story}
@@ -36,6 +43,7 @@ ${story}
 
     const text = response.choices[0].message.content || "";
 
+    // Clean up output (remove numbering, bullets, etc.)
     const headlines = text
       .split("\n")
       .map(line => line.replace(/^\d+[\).\s-]*/, "").trim())
@@ -44,7 +52,7 @@ ${story}
     return NextResponse.json({ headlines });
 
   } catch (error) {
-    console.error(error);
+    console.error("Headline generation error:", error);
 
     return NextResponse.json(
       { error: "Failed to generate headlines" },

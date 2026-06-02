@@ -97,7 +97,6 @@ export default function HeadlineTool() {
 
       const structured = ranges.map((range, i) => {
         const base = generated[i] || "Headline not generated";
-
         const adjusted = adjustLength(base, range.min, range.max);
 
         return {
@@ -149,6 +148,7 @@ export default function HeadlineTool() {
 
         <div className="bg-gray-800 p-6 rounded-2xl mb-8 shadow-lg">
 
+          {/* HEADLINE */}
           <label className="block text-sm text-gray-300 mb-2">
             Your Headline (optional)
           </label>
@@ -159,26 +159,35 @@ export default function HeadlineTool() {
             onChange={(e) => setUserHeadline(e.target.value)}
           />
 
+          {/* WORDS TO AVOID */}
           <label className="block text-sm text-gray-300 mb-2">
             Words to Avoid
           </label>
 
           <input
-            className="w-full p-3 rounded-xl bg-white text-black mb-4"
+            className="w-full p-3 rounded-xl bg-white text-black mb-2"
+            placeholder="e.g. new, huge, shocking"
             value={avoidWords}
             onChange={(e) => setAvoidWords(e.target.value)}
           />
 
+          <p className="text-xs text-gray-500 mb-4">
+            Leave blank if you don't need constraints.
+          </p>
+
+          {/* WORDS TO INCLUDE */}
           <label className="block text-sm text-gray-300 mb-2">
             Words to Include
           </label>
 
           <input
             className="w-full p-3 rounded-xl bg-white text-black mb-6"
+            placeholder="e.g. Houston, mayor"
             value={includeWords}
             onChange={(e) => setIncludeWords(e.target.value)}
           />
 
+          {/* STORY */}
           <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-300">
               Story / Article
@@ -206,6 +215,7 @@ export default function HeadlineTool() {
           </button>
         </div>
 
+        {/* USER HEADLINE */}
         {userScore && (
           <div className="mb-8 border border-gray-700 p-4 rounded-xl bg-gray-800">
             <h2 className="text-lg font-semibold mb-2">
@@ -220,6 +230,7 @@ export default function HeadlineTool() {
           </div>
         )}
 
+        {/* RESULTS */}
         <div className="space-y-6">
           {results.map((r, i) => (
             <div
