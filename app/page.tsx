@@ -154,17 +154,29 @@ export default function Home() {
             About
           </h2>
 
-          <p className="text-gray-400 max-w-2xl leading-relaxed">
-            I started in small-town journalism, working as a news reporter in Junction City, Kansas then moved into sports reporting in Columbus, Nebraska. From there, I stepped into larger roles — becoming a sports editor and eventually a managing editor in Ridgecrest, California.
-            <br /><br />
-            My path shifted into production and design in Carson City, Nevada then expanded further in Austin, Texas where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston working across copy editing, production systems and team management.
-            <br /><br />
-            Along the way, I started noticing recurring themes across major publications — automation, AI and the future of work. That curiosity led me to build tools and systems that improve efficiency and output.
-            <br /><br />
-            I’m entirely self-taught and tend to work across disciplines connecting ideas between journalism, technology and operations.
-            <br /><br />
-            Outside of work, I played college football and paint — two disciplines that continue to shape how I approach structure, creativity and problem-solving.
-          </p>
+         <div className="text-gray-400 max-w-2xl leading-relaxed space-y-4">
+
+  <p>
+    I started in small-town journalism, working as a news reporter in Junction City, Kansas then moved into sports reporting in Columbus, Nebraska. From there, I stepped into larger roles — becoming a sports editor and eventually a managing editor in Ridgecrest, California.
+  </p>
+
+  <p>
+    My path shifted into production and design in Carson City, Nevada then expanded further in Austin, Texas where I led design teams responsible for multiple publications. I continued taking on broader operational roles in Killeen and Houston working across copy editing, production systems and team management.
+  </p>
+
+  <p>
+    Along the way, I started noticing recurring patterns — repetition, constraint-based decision making and the challenge of translating information across formats. That led me to build tools that make those processes more visible and more intentional.
+  </p>
+
+  <p>
+    The projects on this site explore that idea from different angles — how headlines are evaluated, how stories are reframed and how content changes depending on how it’s delivered.
+  </p>
+
+  <p>
+    I’m entirely self-taught and tend to work across disciplines connecting journalism, technology and systems thinking.
+  </p>
+
+</div>
         </section>
 
         {/* FOOTER */}
