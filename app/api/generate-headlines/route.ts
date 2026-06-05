@@ -5,6 +5,13 @@ export async function POST(req: Request) {
   try {
     const { story, avoidWords, includeWords, referenceHeadline } = await req.json();
 
+    if (!story) {
+      return NextResponse.json(
+        { error: "Story is required" },
+        { status: 400 }
+      );
+    }
+
     const client = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
@@ -21,27 +28,20 @@ Each headline must:
 - Use sentence case
 - Be specific and clear
 
-Each headline must reflect ONE of these editorial angles:
-1. Decision
-2. Impact
-3. Scale
-4. Timeline
-5. Key actor
-6. Secondary detail
+Each headline should reflect a DIFFERENT editorial angle.
 
 ${avoidWords ? `- STRICTLY avoid: ${avoidWords}` : ""}
 ${includeWords ? `- MUST include when relevant: ${includeWords}` : ""}
 ${referenceHeadline ? `Use this headline as directional guidance: ${referenceHeadline}` : ""}
 
-Return ONLY valid JSON in this format:
-
+Return EITHER:
+1. A JSON array like:
 [
-  {
-    "headline": "...",
-    "angle": "Decision",
-    "reason": "Why this headline works"
-  }
+  { "headline": "...", "angle": "...", "reason": "..." }
 ]
+
+OR
+2. Plain text headlines, one per line.
 
 Story:
 ${story}
@@ -54,19 +54,35 @@ ${story}
 
     const text = response.choices[0].message.content || "";
 
-    let headlines = [];
+    let headlines: any[] = [];
 
+    // 🔥 Try structured JSON first
     try {
-      headlines = JSON.parse(text);
-    } catch {
+      const jsonMatch = text.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        headlines = JSON.parse(jsonMatch[0]);
+      }
+    } catch (err) {
       console.error("JSON parse failed:", text);
-      headlines = [];
+    }
+
+    // 🔥 Fallback to plain text headlines
+    if (!headlines.length) {
+      headlines = text
+        .split("\n")
+        .filter(line => line.trim().length > 10)
+        .slice(0, 6)
+        .map(line => ({
+          headline: line.trim(),
+          angle: "",
+          reason: "Generated headline (fallback mode)"
+        }));
     }
 
     return NextResponse.json({ headlines });
 
   } catch (error) {
-    console.error("Headline error:", error);
+    console.error("Headline API error:", error);
 
     return NextResponse.json(
       { error: "Failed to generate headlines" },
