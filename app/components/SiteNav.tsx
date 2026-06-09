@@ -12,7 +12,7 @@ export function SiteNav() {
     <header className="sticky top-0 z-50 border-b border-gray-900 bg-black/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4 text-sm text-gray-400">
         <Link href="/" className="font-semibold text-white hover:text-gray-300 transition">
-          Brad Kester
+          Brad J Kester
         </Link>
 
         <div className="flex flex-wrap justify-end gap-x-4 gap-y-2">

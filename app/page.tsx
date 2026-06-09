@@ -9,7 +9,7 @@ export default function Home() {
         <section className="mb-28">
 
           <p className="text-gray-500 mb-4 text-sm tracking-widest uppercase">
-            Brad Kester — Journalist & Developer
+            Brad J Kester — Journalist & Developer
           </p>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight max-w-4xl">
@@ -205,7 +205,7 @@ export default function Home() {
 
         {/* FOOTER */}
         <footer className="border-t border-gray-800 pt-6 text-gray-500 text-sm">
-          © {new Date().getFullYear()} Brad Kester
+          © {new Date().getFullYear()} Brad J Kester
         </footer>
 
       </div>

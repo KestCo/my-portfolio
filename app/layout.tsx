@@ -14,18 +14,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Brad Kester | Journalist & Developer",
+  title: "Brad J Kester | Journalist & Developer",
   description:
-    "Portfolio of newsroom tools, AI experiments and workflow systems by Brad Kester.",
+    "Portfolio of newsroom tools, AI experiments and workflow systems by Brad J Kester.",
   openGraph: {
-    title: "Brad Kester | Journalist & Developer",
+    title: "Brad J Kester | Journalist & Developer",
     description:
       "Newsroom tools, AI experiments and workflow systems built around headlines, audio and editorial automation.",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Brad Kester | Journalist & Developer",
+    title: "Brad J Kester | Journalist & Developer",
     description:
       "Newsroom tools, AI experiments and workflow systems built around headlines, audio and editorial automation.",
   },
