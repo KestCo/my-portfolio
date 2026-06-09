@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
 
 function scoreHeadline(headline: string, reference?: string) {
   let score = 10;
@@ -30,22 +31,32 @@ function scoreHeadline(headline: string, reference?: string) {
   };
 }
 
-function adjustLength(text: string, min: number, max: number) {
-  if (text.length > max) {
-    let trimmed = text.slice(0, max);
-    return trimmed.slice(0, trimmed.lastIndexOf(" "));
-  }
-  return text;
-}
-
 function removeFirstNames(text: string) {
   return text.replace(/\b[A-Z][a-z]+\s([A-Z][a-z]+)\b/g, "$1");
+}
+
+function enforceAvoidWords(text: string, avoidWords: string) {
+  if (!avoidWords) return text;
+
+  const words = avoidWords
+    .split(",")
+    .map((w) => w.trim().toLowerCase())
+    .filter(Boolean);
+
+  let result = text;
+
+  words.forEach((word) => {
+    const regex = new RegExp(`\\b${word}\\b`, "gi");
+    result = result.replace(regex, "");
+  });
+
+  return result.replace(/\s+/g, " ").trim();
 }
 
 function toSentenceCase(text: string) {
   if (!text) return text;
 
-  let result = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  let result = text.charAt(0).toUpperCase() + text.slice(1);
 
   const properNouns = ["Zverev", "Jodar", "French Open"];
 
@@ -57,7 +68,7 @@ function toSentenceCase(text: string) {
   return result;
 }
 
-const ranges = [
+const headlineRanges = [
   { label: "H1", min: 62, max: 68 },
   { label: "H2", min: 57, max: 63 },
   { label: "H3", min: 52, max: 58 },
@@ -66,12 +77,31 @@ const ranges = [
   { label: "H6", min: 37, max: 43 },
 ];
 
+type GeneratedHeadline = {
+  label?: string;
+  headline: string;
+  angle?: string;
+  reason?: string;
+};
+
+type HeadlineResult = {
+  label: string;
+  text: string;
+  range: {
+    min: number;
+    max: number;
+  };
+  angle?: string;
+  reason?: string;
+  score: ReturnType<typeof scoreHeadline>;
+};
+
 export default function HeadlineTool() {
   const [story, setStory] = useState("");
   const [headline, setHeadline] = useState("");
   const [avoidWords, setAvoidWords] = useState("");
   const [includeWords, setIncludeWords] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<HeadlineResult[]>([]);
   const [loading, setLoading] = useState(false);
 
   const generate = async () => {
@@ -92,25 +122,34 @@ export default function HeadlineTool() {
       }),
     });
 
-    const data = await res.json();
-    const generated = data.headlines || [];
+    const data = (await res.json()) as { headlines?: GeneratedHeadline[] };
+    const generated = data.headlines ?? [];
 
-    const structured = ranges.map((range, i) => {
-      const item = generated[i] || generated[0] || {
-        headline: "Unable to generate",
-        angle: "",
-        reason: "",
-      };
+    const structured = headlineRanges.map((range, i) => {
+      const item: GeneratedHeadline =
+        generated.find((candidate) => candidate.label?.toUpperCase() === range.label) ??
+        generated[i] ??
+        generated[0] ??
+        {
+          headline: "Unable to generate",
+          angle: "",
+          reason: "",
+        };
 
       const clean = toSentenceCase(
-        removeFirstNames(
-          adjustLength(item.headline, range.min, range.max)
+        enforceAvoidWords(
+          removeFirstNames(item.headline),
+          avoidWords
         )
       );
 
       return {
         label: range.label,
         text: clean,
+        range: {
+          min: range.min,
+          max: range.max,
+        },
         angle: item.angle,
         reason: item.reason,
         score: scoreHeadline(clean, headline),
@@ -144,7 +183,7 @@ export default function HeadlineTool() {
             onChange={(e) => setHeadline(e.target.value)}
           />
 
-          {/* EDITOR CONTROLS */}
+          {/* CONTROLS */}
           <div className="grid md:grid-cols-2 gap-4 mb-5">
 
             <div>
@@ -174,7 +213,7 @@ export default function HeadlineTool() {
           </div>
 
           <p className="text-xs text-gray-500 mb-5">
-            Leave blank if you don’t need constraints.
+            Leave blank if you don&apos;t need constraints.
           </p>
 
           {/* STORY */}
@@ -200,29 +239,79 @@ export default function HeadlineTool() {
 
         {/* RESULTS */}
         <div className="space-y-6">
-          {results.map((r, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-2xl border border-gray-700 bg-gray-900"
-            >
-              <h2 className="text-lg font-semibold mb-2">
-                {r.label}: {r.text}
-              </h2>
+          {results.map((r, i) => {
+            const characterCount = r.text.length;
+            const isInRange =
+              characterCount >= r.range.min && characterCount <= r.range.max;
 
-              <p className="text-sm mb-2">
-                Score: {r.score.total}/10
-              </p>
+            return (
+              <div
+                key={i}
+                className="p-6 rounded-2xl border border-gray-700 bg-gray-900"
+              >
+                <h2 className="text-lg font-semibold mb-2">
+                  {r.label}: {r.text}
+                </h2>
 
-              <p className="text-xs text-gray-400">
-                Angle: {r.angle}
-              </p>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mb-3">
+                  <span className="text-gray-500">
+                    {characterCount} characters
+                  </span>
+                  <span className={isInRange ? "text-emerald-400" : "text-amber-300"}>
+                    {isInRange
+                      ? `In range (${r.range.min}-${r.range.max})`
+                      : `Target ${r.range.min}-${r.range.max}`}
+                  </span>
+                  <span className="text-gray-500">
+                    Score: {r.score.total}/10
+                  </span>
+                </div>
 
-              <p className="text-xs text-gray-500">
-                {r.reason}
-              </p>
-            </div>
-          ))}
+                {r.angle && (
+                  <p className="text-xs text-gray-400">
+                    Angle: {r.angle}
+                  </p>
+                )}
+
+                {r.reason && (
+                  <p className="text-xs text-gray-500">
+                    {r.reason}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
+
+        <ProjectCaseStudy
+          sections={[
+            {
+              title: "Problem",
+              children:
+                "Headline work has to balance clarity, tone, length and editorial judgment under real deadline pressure.",
+            },
+            {
+              title: "What I built",
+              children:
+                "A headline generator that accepts a story, directional headline, required words and blocked words, then returns H1-H6 options with scoring and range feedback.",
+            },
+            {
+              title: "Why it matters",
+              children:
+                "It makes headline tradeoffs visible instead of treating AI output as a black box.",
+            },
+            {
+              title: "Tools used",
+              children:
+                "Next.js, React state, OpenAI API, structured prompting and editorial scoring rules.",
+            },
+            {
+              title: "Try it",
+              children:
+                "Paste a story above and compare how the framing changes as the target headline length gets shorter.",
+            },
+          ]}
+        />
 
       </div>
     </main>

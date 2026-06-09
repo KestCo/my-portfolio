@@ -1,3 +1,5 @@
+import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
+
 export default function ProjectPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
@@ -12,6 +14,31 @@ export default function ProjectPage() {
         <p className="text-gray-300 mb-10 text-lg">
           A collection of tools and workflows designed to improve efficiency in content production. These projects explore how automation and AI can reduce manual work, improve consistency and scale output across teams.
         </p>
+
+        <ProjectCaseStudy
+          sections={[
+            {
+              title: "Problem",
+              children:
+                "High-volume publishing creates repeated tasks that can slow teams down and introduce inconsistencies.",
+            },
+            {
+              title: "What I built",
+              children:
+                "A set of experiments for headline writing, page production and audio transformation built around recurring newsroom workflows.",
+            },
+            {
+              title: "Why it matters",
+              children:
+                "Automation is most useful when it handles repeatable structure while leaving editorial judgment visible.",
+            },
+            {
+              title: "Tools used",
+              children:
+                "OpenAI API, GPT workflows, layout automation, newsroom systems and production-process design.",
+            },
+          ]}
+        />
 
         {/* Demo Section */}
         <div className="mb-12">

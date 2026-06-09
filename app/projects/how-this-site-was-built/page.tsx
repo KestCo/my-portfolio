@@ -1,3 +1,5 @@
+import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
+
 export default function HowBuiltPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-16">
@@ -12,6 +14,31 @@ export default function HowBuiltPage() {
         <p className="text-gray-300 mb-10 text-lg">
           This guide walks through how I built and deployed this portfolio using Next.js, GitHub and Vercel. It’s a simple, repeatable process that goes from a blank folder to a live website quickly.
         </p>
+
+        <ProjectCaseStudy
+          sections={[
+            {
+              title: "Problem",
+              children:
+                "A portfolio should show the work while also making the build process understandable and repeatable.",
+            },
+            {
+              title: "What I built",
+              children:
+                "A Next.js portfolio with project pages, interactive tools, media demos and a documented path from local project to deployment.",
+            },
+            {
+              title: "Why it matters",
+              children:
+                "Documenting the build turns the site itself into evidence of process, not just a container for finished projects.",
+            },
+            {
+              title: "Tools used",
+              children:
+                "Next.js, React, Tailwind CSS, GitHub, Vercel and iterative AI-assisted development.",
+            },
+          ]}
+        />
 
         {/* Steps */}
         <div className="space-y-10 text-gray-300">

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white px-6 py-20">
+    <main className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white px-6 py-16 md:py-20">
       <div className="max-w-6xl mx-auto">
 
         {/* HERO */}
@@ -45,7 +45,7 @@ export default function Home() {
           </h2>
 
           {/* FEATURED ROW */}
-          <div className="grid md:grid-cols-2 gap-8 mb-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
 
             {/* Headline Architect */}
             <Link
@@ -88,6 +88,30 @@ export default function Home() {
 
               <span className="text-sm text-gray-500 group-hover:text-white transition">
                 Listen →
+              </span>
+            </Link>
+
+            {/* Word Architect */}
+            <Link
+              href="https://word-architect.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
+            >
+              <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
+                Interactive Experience
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
+                Word Architect
+              </h3>
+
+              <p className="text-gray-400 mb-6">
+                A word-based strategy game exploring structure, constraints and creative decision-making.
+              </p>
+
+              <span className="text-sm text-gray-500 group-hover:text-white transition">
+                Play →
               </span>
             </Link>
 

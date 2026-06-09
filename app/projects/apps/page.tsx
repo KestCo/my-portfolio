@@ -1,3 +1,5 @@
+import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
+
 export default function AppsPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
@@ -12,6 +14,31 @@ export default function AppsPage() {
         <p className="text-gray-300 mb-10 text-lg">
           A collection of small applications built to explore interaction, logic, and real-world problem solving.
         </p>
+
+        <ProjectCaseStudy
+          sections={[
+            {
+              title: "Problem",
+              children:
+                "Interactive systems need clear rules and feedback so users understand how their choices shape the result.",
+            },
+            {
+              title: "What I built",
+              children:
+                "Small applications that test language play, decision feedback and constraint-based interaction.",
+            },
+            {
+              title: "Why it matters",
+              children:
+                "The apps explore how structure can make creative or strategic choices easier to see and evaluate.",
+            },
+            {
+              title: "Tools used",
+              children:
+                "Front-end prototyping, interaction design, game logic, feedback systems and deployment on Vercel.",
+            },
+          ]}
+        />
 
         <div className="space-y-16">
 

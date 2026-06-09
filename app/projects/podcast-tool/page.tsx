@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
 
 export default function PodcastTool() {
   const [story, setStory] = useState("");
   const [pronunciations, setPronunciations] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("Writing script...");
 
   const fillSample = () => {
     setStory(
@@ -19,7 +21,13 @@ export default function PodcastTool() {
     if (!story) return;
 
     setLoading(true);
+    setLoadingMessage("Writing script...");
     setAudioUrl("");
+
+    const loadingTimers = [
+      window.setTimeout(() => setLoadingMessage("Generating distinct AI voices..."), 2500),
+      window.setTimeout(() => setLoadingMessage("Preparing audio..."), 8000),
+    ];
 
     try {
       const res = await fetch("/api/generate-podcast", {
@@ -44,9 +52,10 @@ export default function PodcastTool() {
     } catch (err) {
       console.error(err);
       alert("Something went wrong generating the podcast.");
+    } finally {
+      loadingTimers.forEach((timer) => window.clearTimeout(timer));
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -98,9 +107,10 @@ export default function PodcastTool() {
 
           <button
             onClick={generatePodcast}
-            className="w-full bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80 transition"
+            disabled={loading}
+            className="w-full bg-white text-black py-3 rounded-xl font-semibold hover:opacity-80 transition disabled:cursor-not-allowed disabled:opacity-70"
           >
-            {loading ? "Generating Podcast..." : "Generate Podcast"}
+            {loading ? loadingMessage : "Generate Podcast"}
           </button>
 
         </div>
@@ -114,11 +124,41 @@ export default function PodcastTool() {
             </h2>
 
             <audio controls className="w-full">
-              <source src={audioUrl} type="audio/mpeg" />
+              <source src={audioUrl} type="audio/wav" />
             </audio>
 
           </div>
         ) : null}
+
+        <ProjectCaseStudy
+          sections={[
+            {
+              title: "Problem",
+              children:
+                "A written story can lose context when it is converted into audio without editorial framing.",
+            },
+            {
+              title: "What I built",
+              children:
+                "A story-to-audio tool that writes a two-host AI conversation, applies pronunciation notes and gives each AI host a distinct voice profile.",
+            },
+            {
+              title: "Why it matters",
+              children:
+                "It explores how the same reporting can become a clearer listening experience without pretending the hosts are human.",
+            },
+            {
+              title: "Tools used",
+              children:
+                "Next.js, OpenAI chat generation, OpenAI text-to-speech, structured script parsing and audio assembly.",
+            },
+            {
+              title: "Try it",
+              children:
+                "Paste a story above, add pronunciation notes for names if needed and generate a short Front Page Focus segment.",
+            },
+          ]}
+        />
 
       </div>
     </main>
