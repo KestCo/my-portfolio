@@ -131,7 +131,7 @@ export default function Home() {
                 Top Tier Game
               </h3>
               <p className="text-gray-400 text-sm mb-4">
-                A playful ranking game built around fast choices, comparison and replayable decisions.
+                4 tiers. 12 questions. 30 seconds each. Can you reach the Top Tier?
               </p>
               <span className="text-xs text-gray-500 group-hover:text-white transition">
                 Play →

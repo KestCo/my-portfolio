@@ -82,7 +82,7 @@ export default function AppsPage() {
             </h2>
 
             <p className="text-gray-400 mb-4 text-sm">
-              A fast, playful ranking game focused on quick choices, comparison and replayable decision-making.
+              4 tiers. 12 questions. 30 seconds each. Can you reach the Top Tier?
             </p>
 
             <a
