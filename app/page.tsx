@@ -118,7 +118,25 @@ export default function Home() {
           </div>
 
           {/* SUPPORTING GRID */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {/* Top Tier Game */}
+            <Link
+              href="https://top-tier-game.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition bg-gray-900/40"
+            >
+              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
+                Top Tier Game
+              </h3>
+              <p className="text-gray-400 text-sm mb-4">
+                A playful ranking game built around fast choices, comparison and replayable decisions.
+              </p>
+              <span className="text-xs text-gray-500 group-hover:text-white transition">
+                Play →
+              </span>
+            </Link>
 
             {/* Automation */}
             <Link

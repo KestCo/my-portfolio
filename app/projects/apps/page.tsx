@@ -72,6 +72,34 @@ export default function AppsPage() {
           </div>
 
           {/* App 2 */}
+          <div className="border border-gray-800 rounded-2xl p-6 bg-gray-900/40">
+            <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
+              Interactive Game
+            </p>
+
+            <h2 className="text-2xl font-semibold mb-2">
+              Top Tier Game
+            </h2>
+
+            <p className="text-gray-400 mb-4 text-sm">
+              A fast, playful ranking game focused on quick choices, comparison and replayable decision-making.
+            </p>
+
+            <a
+              href="https://top-tier-game.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white text-black px-4 py-2 rounded-xl text-sm hover:opacity-80 transition"
+            >
+              Play Top Tier Game Live →
+            </a>
+
+            <p className="text-gray-500 text-sm mt-4">
+              Built to make ranking and comparison feel immediate, light and fun.
+            </p>
+          </div>
+
+          {/* App 3 */}
           <div>
             <h2 className="text-2xl font-semibold mb-2">
               Decision Feedback System
