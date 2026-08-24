@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 const navItems = [
-  { href: "/#projects", label: "Work" },
+  { href: "/projects/cloud-coding-system", label: "Cloud Coding" },
   { href: "/projects/headline-tool", label: "Headline Architect" },
-  { href: "/projects/podcast-tool", label: "Front Page Focus" },
-  { href: "/#about", label: "About" },
+  { href: "/projects/apps", label: "Game Suite" },
 ];
 
 export function SiteNav() {

@@ -13,7 +13,7 @@ export default function Home() {
           </p>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight max-w-4xl">
-            Tools for better headlines, clearer stories and smarter workflows.
+            I build systems that turn ideas into working digital products.
           </h1>
 
           <p className="text-lg text-gray-400 max-w-2xl mb-10">
@@ -47,6 +47,28 @@ export default function Home() {
           {/* FEATURED ROW */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
 
+            {/* Cloud Coding CNS */}
+            <Link
+              href="/projects/cloud-coding-system"
+              className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
+            >
+              <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
+                Product System
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
+                Cloud Coding CNS
+              </h3>
+
+              <p className="text-gray-400 mb-6">
+                A control plane for building websites, apps and platforms with shared context, branch lineage and AI coding handoffs.
+              </p>
+
+              <span className="text-sm text-gray-500 group-hover:text-white transition">
+                Read plan →
+              </span>
+            </Link>
+
             {/* Headline Architect */}
             <Link
               href="/projects/headline-tool"
@@ -69,49 +91,25 @@ export default function Home() {
               </span>
             </Link>
 
-            {/* Front Page Focus */}
+            {/* Game Suite */}
             <Link
-              href="/projects/podcast-tool"
+              href="/projects/apps"
               className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
             >
               <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
-                Featured Tool
+                Game Collection
               </p>
 
               <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
-                Front Page Focus
+                The Game Suite
               </h3>
 
               <p className="text-gray-400 mb-6">
-                Transform news stories into natural, conversational podcast-style discussions with AI-generated audio.
+                A public showcase for Word Architect, Top Tier and Your Story.
               </p>
 
               <span className="text-sm text-gray-500 group-hover:text-white transition">
-                Listen →
-              </span>
-            </Link>
-
-            {/* Word Architect */}
-            <Link
-              href="https://word-architect.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
-            >
-              <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
-                Interactive Experience
-              </p>
-
-              <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
-                Word Architect
-              </h3>
-
-              <p className="text-gray-400 mb-6">
-                A word-based strategy game exploring structure, constraints and creative decision-making.
-              </p>
-
-              <span className="text-sm text-gray-500 group-hover:text-white transition">
-                Play →
+                View games →
               </span>
             </Link>
 
@@ -120,21 +118,19 @@ export default function Home() {
           {/* SUPPORTING GRID */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            {/* Top Tier Game */}
+            {/* Front Page Focus */}
             <Link
-              href="https://top-tier-game.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/projects/podcast-tool"
               className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition bg-gray-900/40"
             >
               <h3 className="text-lg font-semibold mb-2 group-hover:underline">
-                Top Tier Game
+                Front Page Focus
               </h3>
               <p className="text-gray-400 text-sm mb-4">
-                4 tiers. 12 questions. 30 seconds each. Can you reach the Top Tier?
+                Transform news stories into conversational podcast-style discussions with AI-generated audio.
               </p>
               <span className="text-xs text-gray-500 group-hover:text-white transition">
-                Play →
+                Listen →
               </span>
             </Link>
 
