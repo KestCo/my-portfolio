@@ -18,13 +18,6 @@ const games = [
   },
 ];
 
-const cloudCodingBenefits = [
-  "Keeps product context from getting lost across branches, chats and tools.",
-  "Helps teams compare experiments before deciding what should ship.",
-  "Gives AI coding tools the same mission brief, constraints and review expectations.",
-  "Creates an event trail for what changed, why it changed and what still needs attention.",
-];
-
 export default function AppsPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
@@ -66,39 +59,6 @@ export default function AppsPage() {
         />
 
         <div className="space-y-16">
-
-          {/* Cloud Coding System */}
-          <div className="border border-gray-700 rounded-3xl p-8 bg-gray-900/50">
-            <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
-              Product system
-            </p>
-
-            <h2 className="text-2xl font-semibold mb-3">
-              Cloud Coding CNS
-            </h2>
-
-            <p className="text-gray-400 mb-6 text-sm">
-              A control plane for building digital products such as websites, apps and platforms. The goal is to give every product branch one shared place for context, tasks, lineage, status, review signals and AI coding handoffs.
-            </p>
-
-            <div className="grid gap-4 md:grid-cols-2 mb-6">
-              {cloudCodingBenefits.map((benefit) => (
-                <div
-                  key={benefit}
-                  className="border border-gray-800 rounded-2xl p-5 bg-black/30"
-                >
-                  <p className="text-gray-500 text-sm">{benefit}</p>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="/projects/cloud-coding-system"
-              className="inline-block bg-white text-black px-4 py-2 rounded-xl text-sm hover:opacity-80 transition"
-            >
-              Read the project notes →
-            </a>
-          </div>
 
           {/* Game Suite */}
           <div className="border border-gray-700 rounded-3xl p-8 bg-gray-900/50">
