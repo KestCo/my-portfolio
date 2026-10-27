@@ -47,25 +47,25 @@ export default function Home() {
           {/* FEATURED ROW */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
 
-            {/* Cloud Coding CNS */}
+            {/* Innovation Accelerator */}
             <Link
               href="/projects/cloud-coding-system"
               className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
             >
               <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
-                Product System
+                Private Pilot
               </p>
 
               <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
-                Cloud Coding CNS
+                Innovation Accelerator
               </h3>
 
               <p className="text-gray-400 mb-6">
-                A control plane for building websites, apps and platforms with shared context, branch lineage and AI coding handoffs.
+                An independent project connecting ideas, digital assets and reviewed work.
               </p>
 
               <span className="text-sm text-gray-500 group-hover:text-white transition">
-                Read plan →
+                Explore project →
               </span>
             </Link>
 
