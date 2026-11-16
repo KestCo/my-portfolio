@@ -53,7 +53,7 @@ export default function Home() {
               className="group border border-gray-700 rounded-3xl p-10 hover:border-white transition bg-gray-900/50 backdrop-blur shadow-lg"
             >
               <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
-                Private Pilot
+                Prelaunch Development
               </p>
 
               <h3 className="text-2xl font-semibold mb-4 group-hover:underline">
@@ -61,7 +61,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-400 mb-6">
-                An independent project connecting ideas, digital assets and reviewed work.
+                A workspace in development connecting project conversations, digital assets and reviewed work. Explore the project and its new public introduction.
               </p>
 
               <span className="text-sm text-gray-500 group-hover:text-white transition">

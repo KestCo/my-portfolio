@@ -1,18 +1,25 @@
 import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
+import Image from "next/image";
+import wordArchitectLogo from "@/public/images/games/word-architect-logo.png";
+import topTierLogo from "@/public/images/games/top-tier-logo.png";
+import yourStoryLogo from "@/public/images/games/your-story-logo.png";
 
 const games = [
   {
     title: "Word Architect",
+    logo: wordArchitectLogo,
     text: "A word-based strategy game about structure, constraints and creative decisions.",
     href: "https://word-architect.vercel.app/",
   },
   {
     title: "Top Tier",
+    logo: topTierLogo,
     text: "4 tiers. 12 questions. 30 seconds each. Can you reach the Top Tier?",
     href: "https://top-tier-game.vercel.app/",
   },
   {
     title: "Your Story",
+    logo: yourStoryLogo,
     text: "A creative world-building experience built around player choices and story prompts.",
     href: "https://your-story-zeta.vercel.app/",
   },
@@ -30,7 +37,7 @@ export default function AppsPage() {
 
         {/* Intro */}
         <p className="text-gray-300 mb-10 text-lg">
-          A collection of small applications built to explore interaction, logic, and real-world problem solving.
+          A collection of small applications built to explore interaction, logic and real-world problem solving.
         </p>
 
         <ProjectCaseStudy
@@ -61,12 +68,12 @@ export default function AppsPage() {
         <div className="space-y-16">
 
           {/* Game Suite */}
-          <div className="border border-gray-700 rounded-3xl p-8 bg-gray-900/50">
+          <section aria-labelledby="game-suite-heading" className="border-t border-gray-800 pt-8">
             <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide">
               Game Collection
             </p>
 
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 id="game-suite-heading" className="text-2xl font-semibold mb-3">
               The Game Suite
             </h2>
 
@@ -74,17 +81,18 @@ export default function AppsPage() {
               A lightweight showcase for the games I have built: Word Architect, Top Tier and Your Story. Each game explores a different kind of interaction: word logic, timed reasoning and creative world-building.
             </p>
 
-            <div className="grid gap-4 md:grid-cols-2 mb-6">
+            <div className="grid gap-4 md:grid-cols-3 mb-6">
               {games.map((game) => (
                 <a
                   key={game.title}
                   href={game.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block border border-gray-800 rounded-2xl p-5 hover:border-gray-500 transition bg-black/30"
+                  className="block min-w-0 border border-gray-800 rounded-lg p-5 hover:border-gray-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition bg-black/30"
                 >
+                  <Image src={game.logo} alt={`${game.title} logo`} sizes="(min-width: 944px) 246px, (min-width: 768px) 30vw, calc(100vw - 90px)" className="w-full h-56 object-contain mb-5" />
                   <h3 className="font-semibold mb-2">{game.title}</h3>
-                  <p className="text-gray-500 text-sm">{game.text}</p>
+                  <p className="text-gray-400 text-sm">{game.text}</p>
                 </a>
               ))}
             </div>
@@ -92,7 +100,17 @@ export default function AppsPage() {
             <p className="text-gray-500 text-sm">
               The portfolio now acts as the public showcase for the suite, with direct links to each live game.
             </p>
-          </div>
+          </section>
+
+          <section aria-labelledby="command-center-heading" className="border-t border-gray-800 pt-8">
+            <h2 id="command-center-heading" className="text-2xl font-semibold mb-3">Editorial Command Center</h2>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              Behind the games is a shared Command Center that brings editorial work for Word Architect, Top Tier and Your Story into one place. Editors can open each game's editing or writing tools, make fixes and track drafts through review.
+            </p>
+            <p className="text-gray-400 leading-relaxed">
+              Draft status and readiness views help editors see what needs attention, send work back for corrections and prepare content for publication. The system extends the games beyond the player experience into the editorial work needed to maintain them.
+            </p>
+          </section>
 
           {/* App 1 */}
           <div>

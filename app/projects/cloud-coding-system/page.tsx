@@ -6,7 +6,7 @@ import iphone from "@/public/images/innovation-accelerator/iphone.png";
 
 export const metadata: Metadata = {
   title: "Innovation Accelerator | Brad J Kester",
-  description: "An independent project connecting ideas, digital assets and reviewed work.",
+  description: "A workspace in development connecting project conversations, digital assets and reviewed work. Explore Innovation Accelerator at createwithia.com.",
 };
 
 const capabilities = [
@@ -33,12 +33,16 @@ export default function InnovationAcceleratorPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
       <div className="max-w-5xl mx-auto">
-        <p className="text-sm text-emerald-400 mb-3">Independent project / Private pilot</p>
+        <p className="text-sm text-emerald-400 mb-3">Independent project / Prelaunch development</p>
         <h1 className="text-3xl md:text-5xl font-bold mb-6 break-words">Innovation Accelerator</h1>
         <p className="text-xl text-gray-200 mb-8 max-w-3xl">An independent project connecting ideas, digital assets and reviewed work.</p>
         <div className="max-w-3xl space-y-5 text-gray-300 leading-relaxed mb-12">
-          <p>I’m designing and developing Innovation Accelerator to help people organize files, coordinate project work, review results and keep decisions visible. It brings these activities into a guided workflow that people can use across computers and mobile devices.</p>
+          <p>I’m designing and developing Innovation Accelerator, a workspace that helps individuals and teams turn ideas into websites and digital assets through a project conversation. It brings planning, assignments, files, previews, review and progress together in a guided workflow across computers and mobile devices.</p>
           <p>Using AI-assisted development, I’ve led the product design, defined permissions and approval steps, documented user journeys and tested the experience on Windows and iPhone.</p>
+          <p>A public introduction is now available at createwithia.com. The application and project workspaces remain private while development and testing continue. Live AI assistance and paid API calls within the application remain disabled.</p>
+          <a href="https://createwithia.com" className="inline-flex max-w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-center font-semibold text-black hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-400">
+            Visit Innovation Accelerator
+          </a>
         </div>
 
         <section className="border-t border-gray-800 py-10" aria-labelledby="pilot-heading">
