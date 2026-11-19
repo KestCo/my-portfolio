@@ -6,6 +6,7 @@ import yourStoryLogo from "@/public/images/games/your-story-logo.png";
 import wordArchitectEditor from "@/public/images/game-editors/word-architect.jpg";
 import topTierEditor from "@/public/images/game-editors/top-tier.jpg";
 import yourStoryEditor from "@/public/images/game-editors/your-story.jpg";
+import commandCenter from "@/public/images/game-editors/command-center.jpg";
 
 const editors = [
   {
@@ -140,6 +141,12 @@ export default function AppsPage() {
             <p className="text-gray-400 leading-relaxed">
               Draft status and readiness views help editors see what needs attention, send work back for corrections and prepare content for publication. The system extends the games beyond the player experience into the editorial work needed to maintain them.
             </p>
+            <figure className="mt-6">
+              <a href="/images/game-editors/command-center.jpg" aria-label="View full-size Command Center screenshot" className="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                <Image src={commandCenter} alt="Command Center with Word Architect, Top Tier and Your Story in the game selector, and Your Story's game health and editor workflow status panels visible." sizes="(max-width: 944px) calc(100vw - 48px), 896px" className="w-full h-auto rounded-lg" />
+              </a>
+              <figcaption className="text-sm text-gray-400 leading-relaxed mt-3">One workspace for all three games: the sidebar switches between games, while the selected game shows links to its editor and player experience alongside activity and draft status. Your Story is selected here.</figcaption>
+            </figure>
           </section>
 
           <section aria-labelledby="editors-heading" className="border-t border-gray-800 pt-8">
