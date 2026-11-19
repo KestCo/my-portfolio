@@ -9,18 +9,18 @@ export default function Home() {
         <section className="mb-28">
 
           <p className="text-gray-500 mb-4 text-sm tracking-widest uppercase">
-            Brad J Kester — Journalist & Developer
+            Brad J Kester
           </p>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight max-w-4xl">
-            I build systems that turn ideas into working digital products.
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight max-w-4xl">
+            Journalist, newsroom leader and digital builder.
           </h1>
 
           <p className="text-lg text-gray-400 max-w-2xl mb-10">
-            Working at the intersection of journalism, automation and AI — building systems that improve how content is created, evaluated and delivered.
+            I bring editorial judgment, design experience and hands-on experimentation to journalism and digital products.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="#projects"
               className="bg-white text-black px-6 py-3 rounded-xl font-medium hover:opacity-80 transition"
@@ -34,6 +34,12 @@ export default function Home() {
             >
               About
             </Link>
+            <a href="mailto:bradjkester@gmail.com" className="px-3 py-3 text-gray-300 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              Contact
+            </a>
+            <a href="/documents/brad-kester-resume-2026.pdf" download className="px-3 py-3 text-gray-300 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              Résumé (PDF)
+            </a>
           </div>
 
         </section>
@@ -218,8 +224,12 @@ export default function Home() {
         </section>
 
         {/* FOOTER */}
-        <footer className="border-t border-gray-800 pt-6 text-gray-500 text-sm">
-          © {new Date().getFullYear()} Brad J Kester
+        <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-gray-800 pt-6 text-gray-400 text-sm">
+          <p>© {new Date().getFullYear()} Brad J Kester</p>
+          <nav aria-label="Contact and résumé" className="flex flex-wrap gap-6">
+            <a href="mailto:bradjkester@gmail.com" className="py-2 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Contact</a>
+            <a href="/documents/brad-kester-resume-2026.pdf" download className="py-2 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Résumé (PDF)</a>
+          </nav>
         </footer>
 
       </div>
