@@ -3,6 +3,36 @@ import Image from "next/image";
 import wordArchitectLogo from "@/public/images/games/word-architect-logo.png";
 import topTierLogo from "@/public/images/games/top-tier-logo.png";
 import yourStoryLogo from "@/public/images/games/your-story-logo.png";
+import wordArchitectEditor from "@/public/images/game-editors/word-architect.jpg";
+import topTierEditor from "@/public/images/game-editors/top-tier.jpg";
+import yourStoryEditor from "@/public/images/game-editors/your-story.jpg";
+
+const editors = [
+  {
+    title: "Word Architect: Puzzle Review Dashboard",
+    image: wordArchitectEditor,
+    href: "/images/game-editors/word-architect.jpg",
+    alt: "Word Architect editor showing a word group, Word Lens definitions and answer options.",
+    description: "Editors choose a week and day, then work on a draft while preserving the original puzzle. They can adjust word groups, answer options, difficulty and vocabulary, refine the explanatory Insight Layer and add review notes. Preview and playtest controls support checking the player experience before submitting a final version.",
+    caption: "Word groups, definitions and answer choices can be reviewed together for clarity and fairness.",
+  },
+  {
+    title: "Top Tier: Question Draft Editor",
+    image: topTierEditor,
+    href: "/images/game-editors/top-tier.jpg",
+    alt: "Top Tier editor showing the question list, prompt, four answer choices, correct answer and explanation.",
+    description: "Editors select a daily game and move through its 12 questions, adjusting prompts, answer choices, the correct answer and explanations. Questions can be reordered across the four tiers. A readiness checklist covers clarity, difficulty, fair distractors and a single correct answer, while a weekly variety check helps balance question types. Drafts can be saved, playtested and submitted for review.",
+    caption: "The question list keeps the game structure visible while editors refine individual questions.",
+  },
+  {
+    title: "Your Story: Writer Portal",
+    image: yourStoryEditor,
+    href: "/images/game-editors/your-story.jpg",
+    alt: "Your Story writer portal showing the story library and player blank controls for labels, examples, word limits and spark ideas.",
+    description: "Writers select a story and shape its title, tone, description and template. Placeholders connect player answers to the story, with editable labels, examples, word limits and spark ideas guiding those answers. The portal also includes a movie prompt template, readiness checks and playtesting. Local drafting is available without unlocking shared publishing; shared review and publication require editor access, with a separate action to publish an approved draft.",
+    caption: "Player blank settings define how readers contribute their own words to each story.",
+  },
+];
 
 const games = [
   {
@@ -112,24 +142,23 @@ export default function AppsPage() {
             </p>
           </section>
 
-          {/* App 1 */}
-          <div>
-            <h2 className="text-2xl font-semibold mb-2">
-              Decision Feedback System
-            </h2>
-
-            <p className="text-gray-400 mb-4 text-sm">
-              A system designed to evaluate decisions after they’re made, helping users reflect on outcomes and improve future choices.
-            </p>
-
-            <video controls className="w-full rounded-2xl mb-4">
-              <source src="/videos/app-two.mp4" type="video/mp4" />
-            </video>
-
-            <p className="text-gray-500 text-sm">
-              Built to explore how structured feedback loops can improve decision-making in fast-paced environments.
-            </p>
-          </div>
+          <section aria-labelledby="editors-heading" className="border-t border-gray-800 pt-8">
+            <h2 id="editors-heading" className="text-2xl font-semibold mb-8">Behind the games</h2>
+            <div className="space-y-12">
+              {editors.map((editor) => (
+                <article key={editor.title}>
+                  <h3 className="text-xl font-semibold mb-3">{editor.title}</h3>
+                  <p className="text-gray-300 leading-relaxed mb-5">{editor.description}</p>
+                  <figure>
+                    <a href={editor.href} aria-label={`View full-size screenshot: ${editor.title}`} className="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                      <Image src={editor.image} alt={editor.alt} sizes="(max-width: 944px) calc(100vw - 48px), 896px" className="w-full h-auto rounded-lg" />
+                    </a>
+                    <figcaption className="text-sm text-gray-400 leading-relaxed mt-3">{editor.caption}</figcaption>
+                  </figure>
+                </article>
+              ))}
+            </div>
+          </section>
 
         </div>
 
