@@ -22,7 +22,7 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="#projects"
+              href="#journalism"
               className="bg-white text-black px-6 py-3 rounded-xl font-medium hover:opacity-80 transition"
             >
               View Work
@@ -44,10 +44,18 @@ export default function Home() {
 
         </section>
 
+        <section id="journalism" aria-label="Journalism and editorial design" className="mb-16 scroll-mt-24">
+          <Link href="/projects/editorial-design" className="group block rounded-lg border border-gray-700 p-6 sm:p-8 hover:border-white transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+            <h2 className="text-2xl font-semibold mb-3 group-hover:underline">Journalism &amp; Editorial Design</h2>
+            <p className="text-gray-400 max-w-2xl mb-5">Selected newspaper pages showcasing design, layout and headline writing, from local accountability coverage to commemorative editions and international news.</p>
+            <span className="text-sm text-gray-200 underline underline-offset-4">View the design collection</span>
+          </Link>
+        </section>
+
         {/* PROJECTS */}
         <section id="projects" className="mb-28">
           <h2 className="text-2xl font-semibold mb-12 text-gray-300">
-            Selected Work
+            Digital Projects
           </h2>
 
           {/* FEATURED ROW */}
