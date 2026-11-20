@@ -130,7 +130,7 @@ export default function Home() {
           </div>
 
           {/* SUPPORTING GRID */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {/* Front Page Focus */}
             <Link
@@ -157,26 +157,10 @@ export default function Home() {
                 Automation Systems
               </h3>
               <p className="text-gray-400 text-sm mb-4">
-                AI-driven workflows for newsroom production and efficiency.
+                Page automation for more consistent layouts and less repetitive production work.
               </p>
               <span className="text-xs text-gray-500 group-hover:text-white transition">
                 View →
-              </span>
-            </Link>
-
-            {/* Apps */}
-            <Link
-              href="/projects/apps"
-              className="group border border-gray-800 rounded-2xl p-6 hover:border-gray-500 transition bg-gray-900/40"
-            >
-              <h3 className="text-lg font-semibold mb-2 group-hover:underline">
-                Apps & Tools
-              </h3>
-              <p className="text-gray-400 text-sm mb-4">
-                Interactive systems exploring logic, feedback and behavior.
-              </p>
-              <span className="text-xs text-gray-500 group-hover:text-white transition">
-                Explore →
               </span>
             </Link>
 

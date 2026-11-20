@@ -1,18 +1,18 @@
+import Link from "next/link";
 import { ProjectCaseStudy } from "@/app/components/ProjectCaseStudy";
 
 export default function ProjectPage() {
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
       <div className="max-w-4xl mx-auto">
-
-        {/* Title */}
+        <Link href="/#projects" className="inline-block mb-8 py-2 text-gray-300 underline underline-offset-4 hover:text-white">
+          Back to projects
+        </Link>
         <h1 className="text-3xl md:text-5xl font-bold mb-6">
-          Automation Systems
+          Page Automation
         </h1>
-
-        {/* Summary */}
         <p className="text-gray-300 mb-10 text-lg">
-          A collection of tools and workflows designed to improve efficiency in content production. These projects explore how automation and AI can reduce manual work, improve consistency and scale output across teams.
+          Layout and production workflows designed to reduce repetitive page-building tasks and improve consistency across publications.
         </p>
 
         <ProjectCaseStudy
@@ -20,128 +20,43 @@ export default function ProjectPage() {
             {
               title: "Problem",
               children:
-                "High-volume publishing creates repeated tasks that can slow teams down and introduce inconsistencies.",
+                "High-volume publishing requires repeated layout and production tasks that take time away from editorial decisions.",
             },
             {
               title: "What I built",
               children:
-                "A set of experiments for headline writing, page production and audio transformation built around recurring newsroom workflows.",
+                "Page automation workflows focused on repeatable layout and production steps in a newsroom environment.",
             },
             {
               title: "Why it matters",
               children:
-                "Automation is most useful when it handles repeatable structure while leaving editorial judgment visible.",
+                "Automating routine production steps gives editors more room to focus on story presentation, accuracy and the finished page.",
             },
             {
               title: "Tools used",
               children:
-                "OpenAI API, GPT workflows, layout automation, newsroom systems and production-process design.",
+                "Layout automation, newsroom systems and production-process design.",
             },
           ]}
         />
 
-        {/* Demo Section */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6">Demos</h2>
-
-          <div className="space-y-10">
-
-            {/* Demo 1 */}
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                Headline Writing GPT
-              </h3>
-              <p className="text-gray-400 mb-3 text-sm">
-                Generates headlines using GPT workflows tailored to editorial style, tone and newsroom standards.
-              </p>
-              <video controls className="w-full rounded-2xl">
-                <source src="/videos/headline-tool.mp4" type="video/mp4" />
-              </video>
-            </div>
-
-            {/* Demo 2 */}
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                Page Automation
-              </h3>
-              <p className="text-gray-400 mb-3 text-sm">
-                Automates layout and production workflows, reducing manual effort and improving consistency across publications.
-              </p>
-              <video controls className="w-full rounded-2xl">
-                <source src="/videos/layout-automation.mp4" type="video/mp4" />
-              </video>
-            </div>
-
-            {/* Demo 3 */}
-            <div>
-              <h3 className="text-lg font-semibold mb-2">
-                Front Page Focus — AI-Generated News Podcast
-              </h3>
-              <p className="text-gray-400 mb-3 text-sm">
-                A text-to-audio experiment that turns front page content into a conversational podcast experience.
-              </p>
-              <audio controls className="w-full">
-                <source src="/videos/front-page-focus.wav" type="audio/wav" />
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Details */}
-        <div className="mb-12 space-y-6">
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">What it does</h3>
-            <p className="text-gray-400">
-              These systems automate repetitive editorial tasks, improve consistency, and allow teams to focus on higher-value work.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Why I built it</h3>
-            <p className="text-gray-400">
-              Working in high-volume publishing environments, I identified opportunities to reduce manual work and improve efficiency through automation and AI-assisted tools.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Tools used</h3>
-            <p className="text-gray-400">
-              OpenAI API, GPT tools, workflow design, newsroom systems, experimentation
-            </p>
-          </div>
-
-        </div>
-
-        {/* Impact Section */}
-        <div className="mb-16">
-          <h2 className="text-xl font-semibold mb-6">Impact</h2>
-
-          <div className="space-y-4 text-gray-400">
-            <p>
-              • Reduced manual editing and headline writing time through GPT-assisted workflows
-            </p>
-            <p>
-              • Improved consistency in tone, structure, and SEO optimization across content
-            </p>
-            <p>
-              • Helped scale production workflows across multiple publications and teams
-            </p>
-            <p>
-              • Enabled experimentation with AI-driven formats, including automated podcast generation
-            </p>
-          </div>
-        </div>
-
-        {/* Footer CTA */}
-        <div className="mt-12">
-          <p className="text-gray-500 text-sm">
-            More tools and systems coming soon.
+        <section aria-labelledby="demo-heading" className="mb-12">
+          <h2 id="demo-heading" className="text-xl font-semibold mb-4">Page automation demo</h2>
+          <p className="text-gray-400 mb-6">
+            A look at automation in the page production process, with editorial review remaining part of the workflow.
           </p>
-        </div>
+          <video controls preload="metadata" aria-label="Page automation demonstration" className="w-full rounded-lg">
+            <source src="/videos/layout-automation.mp4" type="video/mp4" />
+            <a href="/videos/layout-automation.mp4">Download the page automation demo</a>
+          </video>
+        </section>
 
+        <section aria-labelledby="purpose-heading" className="mb-12">
+          <h2 id="purpose-heading" className="text-xl font-semibold mb-4">Why I built it</h2>
+          <p className="text-gray-400 leading-relaxed">
+            Working in high-volume publishing environments, I saw opportunities to simplify recurring page production tasks. This work explores how automation can support consistent layouts while keeping the final presentation in editors' hands.
+          </p>
+        </section>
       </div>
     </main>
   );
