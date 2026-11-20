@@ -34,9 +34,9 @@ export default function Home() {
             >
               About
             </Link>
-            <a href="mailto:bradjkester@gmail.com" className="px-3 py-3 text-gray-300 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-              Contact
-            </a>
+            <span className="max-w-full break-words px-3 py-3 text-gray-300 select-text">
+              bradjkester@gmail.com
+            </span>
             <a href="/documents/brad-kester-resume-2026.pdf" download className="px-3 py-3 text-gray-300 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
               Résumé (PDF)
             </a>
@@ -219,7 +219,7 @@ export default function Home() {
         <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-gray-800 pt-6 text-gray-400 text-sm">
           <p>© {new Date().getFullYear()} Brad J Kester</p>
           <nav aria-label="Contact and résumé" className="flex flex-wrap gap-6">
-            <a href="mailto:bradjkester@gmail.com" className="py-2 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Contact</a>
+            <span className="max-w-full break-words py-2 select-text">bradjkester@gmail.com</span>
             <a href="/documents/brad-kester-resume-2026.pdf" download className="py-2 underline underline-offset-4 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Résumé (PDF)</a>
           </nav>
         </footer>
