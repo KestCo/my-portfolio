@@ -6,7 +6,7 @@ import iphone from "@/public/images/innovation-accelerator/iphone.png";
 
 export const metadata: Metadata = {
   title: "Innovation Accelerator | Brad J Kester",
-  description: "A workspace in development connecting project conversations, digital assets and reviewed work. Explore Innovation Accelerator at createwithia.com.",
+  description: "An independent project workspace for organizing files, assigning work and reviewing revisions. Designed and developed by Brad Kester with AI assistance; currently in a private pilot.",
 };
 
 const capabilities = [
@@ -35,15 +35,23 @@ export default function InnovationAcceleratorPage() {
       <div className="max-w-5xl mx-auto">
         <p className="text-sm text-emerald-400 mb-3">Independent project / Prelaunch development</p>
         <h1 className="text-3xl md:text-5xl font-bold mb-6 break-words">Innovation Accelerator</h1>
-        <p className="text-xl text-gray-200 mb-8 max-w-3xl">An independent project connecting ideas, digital assets and reviewed work.</p>
+        <p className="text-xl text-gray-200 mb-8 max-w-3xl">A project workspace for organizing files, assigning work and reviewing results.</p>
         <div className="max-w-3xl space-y-5 text-gray-300 leading-relaxed mb-12">
-          <p>I’m designing and developing Innovation Accelerator, a workspace that helps individuals and teams turn ideas into websites and digital assets through a project conversation. It brings planning, assignments, files, previews, review and progress together in a guided workflow across computers and mobile devices.</p>
-          <p>Using AI-assisted development, I’ve led the product design, defined permissions and approval steps, documented user journeys and tested the experience on Windows and iPhone.</p>
+          <p>Innovation Accelerator brings project files, work assignments, revisions and approvals into one guided workflow. It is designed to help people see what needs to happen next, who is responsible and which version of the work has been accepted.</p>
+          <p>I’m designing and developing this independent project with AI assistance. The private pilot supports file management, work review and controlled static website creation. It is not yet a public service for building apps or platforms.</p>
           <p>A public introduction is now available at createwithia.com. The application and project workspaces remain private while development and testing continue. Live AI assistance and paid API calls within the application remain disabled.</p>
           <a href="https://createwithia.com" className="inline-flex max-w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-center font-semibold text-black hover:bg-gray-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-400">
             Visit Innovation Accelerator
           </a>
         </div>
+
+        <section className="border-t border-gray-800 py-10" aria-labelledby="role-heading">
+          <h2 id="role-heading" className="text-2xl font-semibold mb-6">My role</h2>
+          <div className="max-w-3xl space-y-5 text-gray-300 leading-relaxed">
+            <p>I define the product’s purpose, design the user journeys and decide how files, assignments and review steps fit together. I also define account permissions and approval requirements, document the workflow and direct AI-assisted implementation.</p>
+            <p>I test the experience on Windows and iPhone, review the results and set priorities for revisions. That hands-on testing has helped me identify confusing navigation, improve recovery after sign-out and make the next action easier to find.</p>
+          </div>
+        </section>
 
         <section className="border-t border-gray-800 py-10" aria-labelledby="pilot-heading">
           <h2 id="pilot-heading" className="text-2xl font-semibold mb-6">What the private pilot supports</h2>
@@ -71,7 +79,7 @@ export default function InnovationAcceleratorPage() {
         <section className="border-t border-gray-800 pt-10" aria-labelledby="lessons-heading">
           <h2 id="lessons-heading" className="text-2xl font-semibold mb-6">What this project demonstrates</h2>
           <div className="max-w-3xl space-y-5 text-gray-300 leading-relaxed">
-            <p>The technical work is part of a broader challenge: making complex processes understandable and dependable. I’ve used hands-on testing to identify confusing navigation, improve recovery after sign-out and make the next action easier to find.</p>
+            <p>This project shows how I translate a complicated production process into a clearer sequence of decisions and actions. My focus is on making responsibilities, access and review understandable, then testing whether the workflow behaves as intended.</p>
             <p>Those lessons connect directly to newsroom leadership: establish clear responsibilities, listen to users, document decisions, protect access and evaluate technology by whether it helps people produce better work.</p>
           </div>
         </section>

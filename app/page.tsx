@@ -75,7 +75,7 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-400 mb-6">
-                A workspace in development connecting project conversations, digital assets and reviewed work. Explore the project and its new public introduction.
+                A private-pilot workspace for organizing files, assigning work and reviewing results. An independent project I’m designing and developing with AI assistance.
               </p>
 
               <span className="text-sm text-gray-500 group-hover:text-white transition">
